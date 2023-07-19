@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  password String
+  name     String?
+}
+
+model Logs {
+  Id              Int      @id(map: "PK_Logs") @default(autoincrement())
+  Message         String?  @db.NVarChar(Max)
+  MessageTemplate String?  @db.NVarChar(Max)
+  Level           String?  @db.NVarChar(128)
+  TimeStamp       DateTime @db.DateTime
+  Exception       String?  @db.NVarChar(Max)
+  Properties      String?  @db.NVarChar(Max)
+}
+
+model Settings {
+  id             Int     @id @default(autoincrement())
+  FavorateColor  String?
+  FavorateNumber Int?
+  FavorateFood   String?
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import Modalception from "@/components/Test/ModalOpenModal/modalception";
+import MultiselectTest from "@/components/Test/MultselectTest/multiselectTest";
 import { Button } from "@/components/ui/Button/Button";
 import Modal from "@/components/ui/Modal/modal";
 import { useState } from "react";
@@ -9,7 +10,7 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
   return (
     <div>
-      <Button type="button" onClick={() => setShowModal(true)}>
+      <Button className="ml-5" type="button" onClick={() => setShowModal(true)}>
         Open modal
       </Button>
       {showModal ? (
@@ -18,6 +19,9 @@ export default function Home() {
           <Modalception />
         </Modal>
       ) : null}
+      <div className="ml-5 mt-5">
+        <MultiselectTest />
+      </div>
     </div>
   );
 }

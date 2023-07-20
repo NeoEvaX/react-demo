@@ -1,20 +1,22 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useBoundStore } from "@/store/settingsSlice";
+import { useHiddenSettingsStore } from "./hiddenSettingsState";
+import { Button } from "@/components/ui/Button/Button";
+import { Input } from "@/components/ui/Input/Input";
 
 export default function HiddenSettings() {
-  const favoritefood = useBoundStore((state) => state.favoritefood);
-  const setFavoriteFood = useBoundStore((state) => state.updateFavoriteFood);
+  const favoriteFood = useHiddenSettingsStore((state) => state.favoriteFood);
+  const setFavoriteFood = useHiddenSettingsStore(
+    (state) => state.updateFavoriteFood
+  );
   return (
     <form action="/send-data-here" method="post">
-      <label htmlFor="favoritefood">Favorite Food</label>
+      <label htmlFor="favoriteFood">Favorite Food</label>
       <Input
         type="text"
         id="favoritefood"
-        name="favoritefood"
-        value={favoritefood}
+        name="favoriteFood"
+        value={favoriteFood}
         onChange={(e) => setFavoriteFood(e.target.value)}
         required
       />

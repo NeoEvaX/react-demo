@@ -8,25 +8,1666 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  password String
-  name     String?
+  UserId                                                                    Int                           @id(map: "PK_User") @default(autoincrement())
+  Email                                                                     String?                       @db.NVarChar(50)
+  FirstName                                                                 String?                       @db.NVarChar(50)
+  LastName                                                                  String?                       @db.NVarChar(50)
+  CreatedDate                                                               DateTime                      @db.DateTime
+  CreatedByUserId                                                           Int
+  ModifiedDate                                                              DateTime?                     @db.DateTime
+  ModifiedByUserId                                                          Int?
+  DeletedDate                                                               DateTime?                     @db.DateTime
+  DeletedByUserId                                                           Int?
+  DealApprovalAmount                                                        Decimal?                      @db.Decimal(10, 2)
+  DealApprovalTypeId                                                        Int?
+  MustResetPassword                                                         Boolean                       @default(false, map: "DF__User__MustResetP__28B808A7")
+  HasAllSalesPersons                                                        Boolean                       @default(false, map: "DF__User__HasAllSale__2AA05119")
+  IsDealApprover                                                            Boolean                       @default(false, map: "DF__User__IsDealAppr__29AC2CE0")
+  LastLoginUtc                                                              DateTime?                     @db.DateTime
+  LastCacheBuster                                                           String?                       @db.NVarChar(50)
+  Brand_Brand_CreatedByUserIdToUser                                         Brand[]                       @relation("Brand_CreatedByUserIdToUser")
+  Brand_Brand_ModifiedByUserIdToUser                                        Brand[]                       @relation("Brand_ModifiedByUserIdToUser")
+  Cost_Cost_CreatedByUserIdToUser                                           Cost[]                        @relation("Cost_CreatedByUserIdToUser")
+  Cost_Cost_ModifiedByUserIdToUser                                          Cost[]                        @relation("Cost_ModifiedByUserIdToUser")
+  CostCenter_CostCenter_CreatedByUserIdToUser                               CostCenter[]                  @relation("CostCenter_CreatedByUserIdToUser")
+  CostCenter_CostCenter_ModifiedByUserIdToUser                              CostCenter[]                  @relation("CostCenter_ModifiedByUserIdToUser")
+  DaGlAccount                                                               DaGlAccount[]
+  Deal_Deal_CreatedByUserIdToUser                                           Deal[]                        @relation("Deal_CreatedByUserIdToUser")
+  Deal_Deal_ModifiedByUserIdToUser                                          Deal[]                        @relation("Deal_ModifiedByUserIdToUser")
+  DealApprovalAudit                                                         DealApprovalAudit[]
+  DealType_DealType_CreatedByUserIdToUser                                   DealType[]                    @relation("DealType_CreatedByUserIdToUser")
+  DealType_DealType_ModifiedByUserIdToUser                                  DealType[]                    @relation("DealType_ModifiedByUserIdToUser")
+  DealWithModifiedFobValue_DealWithModifiedFobValue_ChangedByUserIdToUser   DealWithModifiedFobValue[]    @relation("DealWithModifiedFobValue_ChangedByUserIdToUser")
+  DealWithModifiedFobValue_DealWithModifiedFobValue_ConfirmedByUserIdToUser DealWithModifiedFobValue[]    @relation("DealWithModifiedFobValue_ConfirmedByUserIdToUser")
+  Distributor_Distributor_CreatedByUserIdToUser                             Distributor[]                 @relation("Distributor_CreatedByUserIdToUser")
+  Distributor_Distributor_ModifiedByUserIdToUser                            Distributor[]                 @relation("Distributor_ModifiedByUserIdToUser")
+  ExciseTax_ExciseTax_CreatedByUserIdToUser                                 ExciseTax[]                   @relation("ExciseTax_CreatedByUserIdToUser")
+  ExciseTax_ExciseTax_ModifiedByUserIdToUser                                ExciseTax[]                   @relation("ExciseTax_ModifiedByUserIdToUser")
+  ExpenseType_ExpenseType_CreatedByUserIdToUser                             ExpenseType[]                 @relation("ExpenseType_CreatedByUserIdToUser")
+  ExpenseType_ExpenseType_ModifiedByUserIdToUser                            ExpenseType[]                 @relation("ExpenseType_ModifiedByUserIdToUser")
+  Fob_Fob_CreatedByUserIdToUser                                             Fob[]                         @relation("Fob_CreatedByUserIdToUser")
+  Fob_Fob_ModifiedByUserIdToUser                                            Fob[]                         @relation("Fob_ModifiedByUserIdToUser")
+  FobValue_FobValue_CreatedByUserIdToUser                                   FobValue[]                    @relation("FobValue_CreatedByUserIdToUser")
+  FobValue_FobValue_ModifiedByUserIdToUser                                  FobValue[]                    @relation("FobValue_ModifiedByUserIdToUser")
+  GlAccount_GlAccount_CreatedByUserIdToUser                                 GlAccount[]                   @relation("GlAccount_CreatedByUserIdToUser")
+  GlAccount_GlAccount_ModifiedByUserIdToUser                                GlAccount[]                   @relation("GlAccount_ModifiedByUserIdToUser")
+  Invoice_Invoice_ModifiedByUserIdToUser                                    Invoice[]                     @relation("Invoice_ModifiedByUserIdToUser")
+  Invoice_Invoice_CreatedByUserIdToUser                                     Invoice[]                     @relation("Invoice_CreatedByUserIdToUser")
+  Invoice_Invoice_SubmittedByUserIdToUser                                   Invoice[]                     @relation("Invoice_SubmittedByUserIdToUser")
+  InvoiceAudit                                                              InvoiceAudit[]
+  InvoiceImportForDa                                                        InvoiceImportForDa[]
+  InvoiceImportForExpense                                                   InvoiceImportForExpense[]
+  ListPrice_ListPrice_CreatedByUserIdToUser                                 ListPrice[]                   @relation("ListPrice_CreatedByUserIdToUser")
+  ListPrice_ListPrice_ModifiedByUserIdToUser                                ListPrice[]                   @relation("ListPrice_ModifiedByUserIdToUser")
+  PersonalConfigSetting                                                     PersonalConfigSetting[]
+  PriceTierDefault_PriceTierDefault_CreatedByUserIdToUser                   PriceTierDefault[]            @relation("PriceTierDefault_CreatedByUserIdToUser")
+  PriceTierDefault_PriceTierDefault_ModifiedByUserIdToUser                  PriceTierDefault[]            @relation("PriceTierDefault_ModifiedByUserIdToUser")
+  Product_Product_CreatedByUserIdToUser                                     Product[]                     @relation("Product_CreatedByUserIdToUser")
+  Product_Product_ModifiedByUserIdToUser                                    Product[]                     @relation("Product_ModifiedByUserIdToUser")
+  ProductPriceTier_ProductPriceTier_CreatedByUserIdToUser                   ProductPriceTier[]            @relation("ProductPriceTier_CreatedByUserIdToUser")
+  ProductPriceTier_ProductPriceTier_ModifiedByUserIdToUser                  ProductPriceTier[]            @relation("ProductPriceTier_ModifiedByUserIdToUser")
+  SalesPerson_SalesPerson_CreatedByUserIdToUser                             SalesPerson[]                 @relation("SalesPerson_CreatedByUserIdToUser")
+  SalesPerson_SalesPerson_ModifiedByUserIdToUser                            SalesPerson[]                 @relation("SalesPerson_ModifiedByUserIdToUser")
+  SalesPerson_User                                                          SalesPerson_User[]
+  SecurityGroup_SecurityGroup_CreatedByUserIdToUser                         SecurityGroup[]               @relation("SecurityGroup_CreatedByUserIdToUser")
+  SecurityGroup_SecurityGroup_ModifiedByUserIdToUser                        SecurityGroup[]               @relation("SecurityGroup_ModifiedByUserIdToUser")
+  SecurityGroup_User                                                        SecurityGroup_User[]
+  State_State_CreatedByUserIdToUser                                         State[]                       @relation("State_CreatedByUserIdToUser")
+  State_State_ModifiedByUserIdToUser                                        State[]                       @relation("State_ModifiedByUserIdToUser")
+  SystemGeneratedDealApproval                                               SystemGeneratedDealApproval[]
+  User_User_CreatedByUserIdToUser                                           User                          @relation("User_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_User_CreatedByUser")
+  other_User_User_CreatedByUserIdToUser                                     User[]                        @relation("User_CreatedByUserIdToUser")
+  DealApprovalType                                                          DealApprovalType?             @relation(fields: [DealApprovalTypeId], references: [DealApprovalTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_DealApprovalType")
+  User_User_DeletedByUserIdToUser                                           User?                         @relation("User_DeletedByUserIdToUser", fields: [DeletedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_DeletedByUser")
+  other_User_User_DeletedByUserIdToUser                                     User[]                        @relation("User_DeletedByUserIdToUser")
+  User_User_ModifiedByUserIdToUser                                          User?                         @relation("User_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_ModifiedByUser")
+  other_User_User_ModifiedByUserIdToUser                                    User[]                        @relation("User_ModifiedByUserIdToUser")
+  User_User_UserIdToUser                                                    User                          @relation("User_UserIdToUser", fields: [UserId], references: [UserId], onUpdate: NoAction, map: "FK_User_User")
+  other_User_User_UserIdToUser                                              User?                         @relation("User_UserIdToUser")
+  Varietal_Varietal_CreatedByUserIdToUser                                   Varietal[]                    @relation("Varietal_CreatedByUserIdToUser")
+  Varietal_Varietal_ModifiedByUserIdToUser                                  Varietal[]                    @relation("Varietal_ModifiedByUserIdToUser")
+  Vendor_Vendor_CreatedByUserIdToUser                                       Vendor[]                      @relation("Vendor_CreatedByUserIdToUser")
+  Vendor_Vendor_ModifiedByUserIdToUser                                      Vendor[]                      @relation("Vendor_ModifiedByUserIdToUser")
+  Vintage_Vintage_CreatedByUserIdToUser                                     Vintage[]                     @relation("Vintage_CreatedByUserIdToUser")
+  Vintage_Vintage_ModifiedByUserIdToUser                                    Vintage[]                     @relation("Vintage_ModifiedByUserIdToUser")
 }
 
-model Logs {
-  Id              Int      @id(map: "PK_Logs") @default(autoincrement())
-  Message         String?  @db.NVarChar(Max)
-  MessageTemplate String?  @db.NVarChar(Max)
-  Level           String?  @db.NVarChar(128)
-  TimeStamp       DateTime @db.DateTime
-  Exception       String?  @db.NVarChar(Max)
-  Properties      String?  @db.NVarChar(Max)
+model AdditionalTax {
+  AdditionalTaxId                Int                          @id(map: "PK_AdditionalTax") @default(autoincrement())
+  ExciseTaxId                    Int
+  AdditionalTaxCalculationTypeId Int
+  Amount                         Decimal                      @db.Decimal(6, 3)
+  Name                           String                       @db.NVarChar(50)
+  ProductTypeId                  Int?
+  AdditionalTaxCalculationType   AdditionalTaxCalculationType @relation(fields: [AdditionalTaxCalculationTypeId], references: [AdditionalTaxCalculationTypeId], onUpdate: NoAction, map: "FK_AdditionalTax_AdditionalTaxCalculationType")
+  ExciseTax                      ExciseTax                    @relation(fields: [ExciseTaxId], references: [ExciseTaxId], onUpdate: NoAction, map: "FK_AdditionalTax_ExciseTax")
+  ProductType                    ProductType?                 @relation(fields: [ProductTypeId], references: [ProductTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_AdditionalTax_ProductType")
 }
 
-model Settings {
-  id             Int     @id @default(autoincrement())
-  FavorateColor  String?
-  FavorateNumber Int?
-  FavorateFood   String?
+model AdditionalTaxCalculationType {
+  AdditionalTaxCalculationTypeId Int             @id(map: "PK_AdditionalTaxCalculationType") @default(autoincrement())
+  CalculationName                String          @db.NVarChar(50)
+  IsPercentage                   Boolean         @default(false, map: "DF_AdditionalTaxCalculationType_IsPercentage")
+  AdditionalTax                  AdditionalTax[]
+}
+
+model AlertType {
+  AlertTypeId Int    @id(map: "PK_AlertType")
+  Name        String @db.NVarChar(100)
+  Description String @db.NVarChar(100)
+}
+
+model BackendQuery {
+  BackendQueryId     Int                  @id(map: "PK_BackendQuery") @default(autoincrement())
+  Name               String               @db.NVarChar(50)
+  IsValid            Boolean              @default(false, map: "DF_BackendQuery_IsValid")
+  RestOfQuery        String?              @db.NVarChar(Max)
+  UseDistinct        Boolean              @default(true, map: "DF__BackendQu__UseDi__7CD98669")
+  BackendQueryColumn BackendQueryColumn[]
+}
+
+model BackendQueryColumn {
+  BackendQueryColumnId Int          @id(map: "PK_BackendQueryColumn") @default(autoincrement())
+  ColumnName           String       @db.NVarChar(100)
+  ColumnExpression     String?      @db.NVarChar(Max)
+  BackendQueryId       Int
+  BackendQuery         BackendQuery @relation(fields: [BackendQueryId], references: [BackendQueryId], onUpdate: NoAction, map: "FK_BackendQueryColumn_BackendQuery")
+}
+
+model BackendType {
+  BackendTypeId Int    @id(map: "PK_BackendType")
+  Name          String @db.NVarChar(50)
+}
+
+model BottleSize {
+  BottleSizeId Int     @id(map: "PK_BottleSize") @default(autoincrement())
+  Number       Decimal @db.Decimal(10, 3)
+  IsActive     Boolean
+}
+
+model BottlesPerCase {
+  BottlesPerCaseId Int     @id(map: "PK_BottlesPerCase") @default(autoincrement())
+  Number           Int
+  IsActive         Boolean
+}
+
+model Brand {
+  BrandId                           Int                           @id(map: "PK_Brand") @default(autoincrement())
+  Code                              String                        @db.NVarChar(50)
+  Name                              String                        @db.NVarChar(50)
+  IsActive                          Boolean                       @default(true, map: "DF_Brand_IsActive")
+  CreatedDate                       DateTime                      @db.DateTime
+  CreatedByUserId                   Int
+  ModifiedDate                      DateTime?                     @db.DateTime
+  ModifiedByUserId                  Int?
+  CostCenterCode                    String?                       @db.NVarChar(20)
+  User_Brand_CreatedByUserIdToUser  User                          @relation("Brand_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_Brand_CreatedByUser")
+  User_Brand_ModifiedByUserIdToUser User?                         @relation("Brand_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Brand_ModifiedByUser")
+  CostProduct                       CostProduct[]
+  DealProduct                       DealProduct[]
+  FobProduct                        FobProduct[]
+  InvoiceDetailForExpense           InvoiceDetailForExpense[]
+  InvoiceImportForDa                InvoiceImportForDa[]
+  InvoiceImportForExpense           InvoiceImportForExpense[]
+  InvoiceProductMapForDa            InvoiceProductMapForDa[]
+  InvoiceProductMapForExpense       InvoiceProductMapForExpense[]
+  ListPriceProduct                  ListPriceProduct[]
+  Product                           Product[]
+  ProductGroupItem                  ProductGroupItem[]
+}
+
+model ConfigSetting {
+  ConfigSettingId            Int                   @id(map: "PK_Configuration") @default(autoincrement())
+  Setting                    String                @db.NVarChar(50)
+  Value                      String                @db.NVarChar(Max)
+  Description                String?               @db.NVarChar(500)
+  IsSiteConfigurable         Boolean               @default(false, map: "DF_ConfigSetting_IsSiteConfigurable")
+  FriendlyName               String                @default("", map: "DF_ConfigSetting_FriendlyName") @db.NVarChar(100)
+  ConfigSettingDataTypeId    Int                   @default(2, map: "DF_ConfigSetting_ConfigSettingDataTypeId")
+  RegularExpressionValidator String?               @db.NVarChar(50)
+  ValueLookupList            String?               @db.NVarChar(Max)
+  Warning                    String?               @db.NVarChar(500)
+  ConfigSettingDataType      ConfigSettingDataType @relation(fields: [ConfigSettingDataTypeId], references: [ConfigSettingDataTypeId], onUpdate: NoAction, map: "FK_ConfigSetting_ConfigSettingDataType")
+}
+
+model ConfigSettingDataType {
+  ConfigSettingDataTypeId Int             @id(map: "PK_ConfigSettingDataType")
+  Name                    String          @db.NVarChar(10)
+  ConfigSetting           ConfigSetting[]
+}
+
+model Cost {
+  CostId                                                        Int                   @id(map: "PK_Cost") @default(autoincrement())
+  CostTypeId                                                    Int
+  Name                                                          String                @db.NVarChar(150)
+  AsOfDate                                                      DateTime              @db.Date
+  State                                                         String?               @db.NVarChar(20)
+  FobTypeId                                                     Int?
+  PayingCostEntityTypeId                                        Int
+  ReceivingCostEntityTypeId                                     Int?
+  InactiveDate                                                  DateTime?             @db.Date
+  Notes                                                         String?               @db.NVarChar(Max)
+  CreatedDate                                                   DateTime              @db.DateTime
+  CreatedByUserId                                               Int
+  ModifiedDate                                                  DateTime?             @db.DateTime
+  ModifiedByUserId                                              Int?
+  IsQualifiedCost                                               Boolean               @default(false, map: "DF__Cost__IsQualifie__02925FBF")
+  CostEntityType_Cost_PayingCostEntityTypeIdToCostEntityType    CostEntityType        @relation("Cost_PayingCostEntityTypeIdToCostEntityType", fields: [PayingCostEntityTypeId], references: [CostEntityTypeId], onUpdate: NoAction, map: "FK_Cost_CostEntityType_Paying")
+  CostEntityType_Cost_ReceivingCostEntityTypeIdToCostEntityType CostEntityType?       @relation("Cost_ReceivingCostEntityTypeIdToCostEntityType", fields: [ReceivingCostEntityTypeId], references: [CostEntityTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Cost_CostEntityType_Receiving")
+  CostType                                                      CostType              @relation(fields: [CostTypeId], references: [CostTypeId], onUpdate: NoAction, map: "FK_Cost_CostType1")
+  FobType                                                       FobType?              @relation(fields: [FobTypeId], references: [FobTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Cost_FobType")
+  User_Cost_CreatedByUserIdToUser                               User                  @relation("Cost_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_Cost_User_CreatedByUserId")
+  User_Cost_ModifiedByUserIdToUser                              User?                 @relation("Cost_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Cost_User_ModifiedByUserId")
+  CostAlcoholTaxRange                                           CostAlcoholTaxRange[]
+  CostCalculation                                               CostCalculation[]
+  CostDealExclusion                                             CostDealExclusion[]
+  CostDistributor                                               CostDistributor[]
+  CostProduct                                                   CostProduct[]
+}
+
+model CostAlcoholTaxRange {
+  CostAlcoholTaxRangeId Int         @id(map: "PK_CostAlcoholTaxRange") @default(autoincrement())
+  CostId                Int
+  ProductTypeId         Int
+  FromAlcoholPercent    Decimal?    @db.Decimal(6, 3)
+  ToAlcoholPercent      Decimal?    @db.Decimal(6, 3)
+  TaxAmount9L           Decimal     @db.Decimal(6, 3)
+  Cost                  Cost        @relation(fields: [CostId], references: [CostId], onUpdate: NoAction, map: "FK_CostAlcoholTaxRange_Cost")
+  ProductType           ProductType @relation(fields: [ProductTypeId], references: [ProductTypeId], onUpdate: NoAction, map: "FK_CostAlcoholTaxRange_ProductType")
+}
+
+model CostCalculation {
+  CostCalculationId      Int                 @id(map: "PK_CostCalculation") @default(autoincrement())
+  CostCalculationTypeId  Int
+  Amount                 Decimal             @db.Decimal(6, 3)
+  BottleSize             Decimal?            @db.Decimal(10, 3)
+  BottlesPerCase         Int?
+  CostId                 Int
+  CostQualifierTypeId    Int?
+  QualifierQuantity      Decimal?            @db.Decimal(6, 2)
+  QualifierAmountPerUnit Decimal?            @db.Decimal(6, 3)
+  CostQualifierType      CostQualifierType?  @relation(fields: [CostQualifierTypeId], references: [CostQualifierTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK__CostCalcu__CostQ__48BAC3E5")
+  Cost                   Cost                @relation(fields: [CostId], references: [CostId], onUpdate: NoAction, map: "FK_CostCalculation_Cost")
+  CostCalculationType    CostCalculationType @relation(fields: [CostCalculationTypeId], references: [CostCalculationTypeId], onUpdate: NoAction, map: "FK_CostCalculation_CostCalculationType")
+}
+
+model CostCalculationType {
+  CostCalculationTypeId Int               @id(map: "PK_CostCalculationType")
+  CalculationName       String            @db.NVarChar(50)
+  IsPercentage          Boolean           @default(false, map: "DF__CostCalcu__IsPer__038683F8")
+  CostCalculation       CostCalculation[]
+}
+
+model CostCenter {
+  CostCenterId                           BigInt    @id(map: "PK_CostCenter") @default(autoincrement())
+  Code                                   String    @db.NVarChar(50)
+  Description                            String    @db.NVarChar(50)
+  IsActive                               Boolean   @default(true, map: "DF_CostCenter_IsActive")
+  CreatedDate                            DateTime  @db.DateTime
+  CreatedByUserId                        Int
+  ModifiedDate                           DateTime? @db.DateTime
+  ModifiedByUserId                       Int?
+  User_CostCenter_CreatedByUserIdToUser  User      @relation("CostCenter_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_CostCenter_CreatedByUser")
+  User_CostCenter_ModifiedByUserIdToUser User?     @relation("CostCenter_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_CostCenter_ModifiedByUser")
+}
+
+model CostDealExclusion {
+  CostDealExclusionId Int  @id(map: "PK_CostDealExclusion") @default(autoincrement())
+  CostId              Int
+  DealId              Int
+  Cost                Cost @relation(fields: [CostId], references: [CostId], onUpdate: NoAction, map: "FK_CostDealExclusion_Cost")
+  Deal                Deal @relation(fields: [DealId], references: [DealId], onUpdate: NoAction, map: "FK_CostDealExclusion_Deal")
+}
+
+model CostDistributor {
+  CostDistributorId Int         @id(map: "PK_CostDistributor") @default(autoincrement())
+  CostId            Int
+  DistributorId     Int
+  Cost              Cost        @relation(fields: [CostId], references: [CostId], onUpdate: NoAction, map: "FK_CostDistributor_Cost")
+  Distributor       Distributor @relation(fields: [DistributorId], references: [DistributorId], onUpdate: NoAction, map: "FK_CostDistributor_Distributor")
+}
+
+model CostEntityType {
+  CostEntityTypeId                                    Int    @id(map: "PK_CostEntityType")
+  Name                                                String @db.NVarChar(50)
+  DisplayOrder                                        Int
+  Cost_Cost_PayingCostEntityTypeIdToCostEntityType    Cost[] @relation("Cost_PayingCostEntityTypeIdToCostEntityType")
+  Cost_Cost_ReceivingCostEntityTypeIdToCostEntityType Cost[] @relation("Cost_ReceivingCostEntityTypeIdToCostEntityType")
+}
+
+model CostProduct {
+  CostProductId  Int           @id(map: "PK_CostProduct") @default(autoincrement())
+  CostId         Int
+  ProductGroupId Int?
+  ProductTypeId  Int?
+  BrandId        Int?
+  VarietalId     Int?
+  Brand          Brand?        @relation(fields: [BrandId], references: [BrandId], onDelete: NoAction, onUpdate: NoAction, map: "FK_CostProduct_Brand")
+  Cost           Cost          @relation(fields: [CostId], references: [CostId], onUpdate: NoAction, map: "FK_CostProduct_Cost")
+  ProductGroup   ProductGroup? @relation(fields: [ProductGroupId], references: [ProductGroupId], onDelete: NoAction, onUpdate: NoAction, map: "FK_CostProduct_ProductGroup")
+  ProductType    ProductType?  @relation(fields: [ProductTypeId], references: [ProductTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_CostProduct_ProductType")
+  Varietal       Varietal?     @relation(fields: [VarietalId], references: [VarietalId], onDelete: NoAction, onUpdate: NoAction, map: "FK_CostProduct_Varietal")
+}
+
+model CostQualifierType {
+  CostQualifierTypeId Int               @id(map: "PK_CostQualifierType")
+  Code                String            @db.NVarChar(50)
+  Description         String            @db.NVarChar(50)
+  DisplayOrder        Int
+  CostCalculation     CostCalculation[]
+}
+
+model CostType {
+  CostTypeId   Int    @id(map: "PK_CostType")
+  Name         String @db.NVarChar(50)
+  DisplayOrder Int
+  Cost         Cost[]
+}
+
+model DaGlAccount {
+  DaGlAccountId    Int       @id(map: "PK_DaGlAccount") @default(autoincrement())
+  GlAccount        String?   @db.NVarChar(50)
+  Name             String?   @db.NVarChar(50)
+  ModifiedDate     DateTime? @db.DateTime
+  ModifiedByUserId Int?
+  User             User?     @relation(fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_ModifiedByUser")
+}
+
+model Deal {
+  DealId                                Int                           @id(map: "PK_Deal") @default(autoincrement())
+  Description                           String?                       @db.NVarChar(255)
+  PercentOfBusiness                     Decimal?                      @db.Decimal(5, 2)
+  PriceToRetailer                       Decimal                       @db.Decimal(10, 2)
+  Spa                                   Decimal?                      @db.Decimal(10, 2)
+  Da                                    Decimal?                      @db.Decimal(10, 2)
+  FreeGoods                             Decimal?                      @db.Decimal(10, 2)
+  SuggestedRetailPrice                  Decimal?                      @db.Decimal(10, 2)
+  CreatedDate                           DateTime                      @db.DateTime
+  CreatedByUserId                       Int
+  ModifiedDate                          DateTime?                     @db.DateTime
+  ModifiedByUserId                      Int?
+  Notes                                 String?                       @db.NVarChar(Max)
+  ListPrice_FobPrice                    Decimal                       @db.Decimal(10, 2)
+  ListPrice_PriceToRetailer             Decimal                       @db.Decimal(10, 2)
+  ListPrice_SuggestedRetailPrice        Decimal?                      @db.Decimal(10, 2)
+  ListPrice_CaseOnePriceToRetailer      Decimal?                      @db.Decimal(10, 2)
+  ListPrice_CaseOneSuggestedRetailPrice Decimal?                      @db.Decimal(10, 2)
+  HasPulseDates                         Boolean                       @default(false, map: "DF_Deal_HasPulseDates")
+  DealApprovalStatusTypeId              Int                           @default(4, map: "DF_Deal_DealApprovalStatusTypeId")
+  NationalAccountDealTypeId             Int?
+  RetailerExpenses                      Decimal?                      @db.Decimal(10, 2)
+  RetailerExpensesDescription           String?                       @db.NVarChar(Max)
+  FobValueId                            Int?
+  ProductGroupId                        Int?
+  EstimatedAnnualCaseVolume             Int?
+  MinimumCases                          Decimal?                      @db.Decimal(10, 1)
+  CostDealExclusion                     CostDealExclusion[]
+  User_Deal_CreatedByUserIdToUser       User                          @relation("Deal_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_Deal_CreatedByUser")
+  DealApprovalStatusType                DealApprovalStatusType        @relation(fields: [DealApprovalStatusTypeId], references: [DealApprovalStatusTypeId], onUpdate: NoAction, map: "FK_Deal_DealApprovalStatusType")
+  FobValue                              FobValue?                     @relation(fields: [FobValueId], references: [FobValueId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Deal_FobValue")
+  User_Deal_ModifiedByUserIdToUser      User?                         @relation("Deal_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Deal_ModifiedByUser")
+  NationalAccountDealType               NationalAccountDealType?      @relation(fields: [NationalAccountDealTypeId], references: [NationalAccountDealTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Deal_NationalAccountDealType")
+  ProductGroup                          ProductGroup?                 @relation(fields: [ProductGroupId], references: [ProductGroupId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Deal_ProductGroup")
+  Deal_DealType                         Deal_DealType[]
+  DealApprovalAudit                     DealApprovalAudit[]
+  DealDateRange                         DealDateRange[]
+  DealDisplayOrder                      DealDisplayOrder[]
+  DealPercentOfBusiness                 DealPercentOfBusiness[]
+  DealProduct                           DealProduct[]
+  DealWithModifiedFobValue              DealWithModifiedFobValue[]
+  Distributor_Deal                      Distributor_Deal[]
+  SystemGeneratedDealApproval           SystemGeneratedDealApproval[]
+
+  @@index([Description], map: "Idx_Description")
+}
+
+model Deal_DealType {
+  Deal_DealTypeId Int      @id(map: "PK_Deal_DealType") @default(autoincrement())
+  DealId          Int
+  DealTypeId      Int
+  Deal            Deal     @relation(fields: [DealId], references: [DealId], onUpdate: NoAction, map: "FK_Deal_DealType_Deal")
+  DealType        DealType @relation(fields: [DealTypeId], references: [DealTypeId], onUpdate: NoAction, map: "FK_Deal_DealType_DealType")
+
+  @@index([DealId, DealTypeId], map: "_dta_index_Deal_DealType_40_533576939__K2_K3")
+}
+
+model DealApprovalAudit {
+  DealApprovalAuditId      BigInt                 @id(map: "PK_DealApprovalAudit") @default(autoincrement())
+  DealId                   Int
+  DealApprovalStatusTypeId Int
+  RejectedReason           String?                @db.NVarChar(200)
+  ActionDate               DateTime               @db.DateTime
+  UserId                   Int
+  Value                    Decimal                @db.Decimal(10, 2)
+  DealApprovalTypeId       Int
+  NeedsApprovalNote        String?                @db.NVarChar(200)
+  Deal                     Deal                   @relation(fields: [DealId], references: [DealId], onUpdate: NoAction, map: "FK_DealApprovalAudit_Deal")
+  DealApprovalStatusType   DealApprovalStatusType @relation(fields: [DealApprovalStatusTypeId], references: [DealApprovalStatusTypeId], onUpdate: NoAction, map: "FK_DealApprovalAudit_DealApprovalStatusType")
+  DealApprovalType         DealApprovalType       @relation(fields: [DealApprovalTypeId], references: [DealApprovalTypeId], onUpdate: NoAction, map: "FK_DealApprovalAudit_DealApprovalType")
+  User                     User                   @relation(fields: [UserId], references: [UserId], onUpdate: NoAction, map: "FK_DealApprovalAudit_User")
+}
+
+model DealApprovalStatusType {
+  DealApprovalStatusTypeId Int                 @id(map: "PK_DealApprovalStatusType")
+  Name                     String              @db.NVarChar(20)
+  Deal                     Deal[]
+  DealApprovalAudit        DealApprovalAudit[]
+}
+
+model DealApprovalType {
+  DealApprovalTypeId Int                 @id(map: "PK_DealApprovalType")
+  Name               String              @db.NVarChar(50)
+  Description        String              @db.NVarChar(50)
+  ThresholdMessage   String?             @db.NVarChar(200)
+  DealApprovalAudit  DealApprovalAudit[]
+  User               User[]
+}
+
+model DealApprover {
+  DealApproverId Int @id(map: "PK_DealApprover") @default(autoincrement())
+  UserId         Int
+  ApproverUserId Int
+}
+
+model DealDateRange {
+  DealDateRangeId BigInt   @id(map: "PK_DealDateRange") @default(autoincrement())
+  StartDate       DateTime @db.Date
+  EndDate         DateTime @db.Date
+  DealId          Int
+  Deal            Deal     @relation(fields: [DealId], references: [DealId], onUpdate: NoAction, map: "FK_DealDateRange_Deal")
+
+  @@index([StartDate, EndDate, DealId], map: "_dta_index_DealDateRange_29_2021582240__K2_K3_K4")
+  @@index([DealId, DealDateRangeId, StartDate, EndDate], map: "_dta_index_DealDateRange_32_693577509__K4_K1_K2_K3")
+  @@index([DealId], map: "idxDealDateRange_DealId")
+}
+
+model DealDisplayOrder {
+  DealDisplayOrderId     Int      @id(map: "PK_DealDisplayOrder") @default(autoincrement())
+  DealId                 Int
+  OperatingYearStartDate DateTime @db.DateTime
+  OperatingYearEndDate   DateTime @db.DateTime
+  Order                  Int
+  Deal                   Deal     @relation(fields: [DealId], references: [DealId], onUpdate: NoAction, map: "FK_DealDisplayOrder_Deal")
+
+  @@index([DealId, DealDisplayOrderId, OperatingYearStartDate, OperatingYearEndDate, Order], map: "idx_DealDisplayOrder_DealDates")
+  @@index([DealId, DealDisplayOrderId, OperatingYearStartDate, OperatingYearEndDate, Order], map: "idx_DealDisplayOrder_DealDatesOrder")
+  @@index([DealId, OperatingYearStartDate, OperatingYearEndDate], map: "idx_DealStartEnd")
+}
+
+model DealList {
+  DealId                   Int       @id(map: "PK_DealList")
+  State                    String    @db.NVarChar(20)
+  Distributor              String?   @db.NVarChar(253)
+  Label                    String?   @db.NVarChar(Max)
+  Pack                     String?   @db.NVarChar(20)
+  BrandIds                 String?   @db.NVarChar(Max)
+  VarietalIds              String?   @db.NVarChar(Max)
+  VintageIds               String?   @db.NVarChar(Max)
+  BottleSize               Decimal?  @db.Decimal(10, 3)
+  BottlesPerCase           Int?
+  Description              String?   @db.NVarChar(255)
+  PriceToRetailer          Decimal   @db.Decimal(10, 2)
+  ListPricePriceToRetailer Decimal   @db.Decimal(10, 2)
+  PercentDiscount          Decimal   @db.Decimal(10, 2)
+  NetBottleCost            Decimal?  @db.Decimal(10, 2)
+  Da                       Decimal?  @db.Decimal(10, 2)
+  Spa                      Decimal?  @db.Decimal(10, 2)
+  PercentOfBusiness        Decimal?  @db.Decimal(5, 2)
+  NetRevenue               Decimal   @db.Decimal(19, 2)
+  DistributorCode          String?   @db.NVarChar(50)
+  DealTypes                String?   @db.NVarChar(Max)
+  DealTypeIds              String?   @db.NVarChar(Max)
+  DealApprovalStatusTypeId Int
+  DistributorId            Int
+  SalespersonId            Int?
+  Region                   String?   @db.NVarChar(200)
+  DiscountRate             Decimal?  @db.Decimal(11, 2)
+  FreeGoods                Decimal?  @db.Decimal(10, 2)
+  StartDate                String?   @db.NVarChar(10)
+  EndDate                  String?   @db.NVarChar(10)
+  StartDateSort            DateTime? @db.Date
+  EndDateSort              DateTime? @db.Date
+  NationalAccountTypeId    Int?
+  NationalAccountDealType  String?   @db.NVarChar(50)
+  ProductGroupId           Int?
+  FobValue                 Decimal?  @db.Decimal(10, 2)
+  IsOnSubmittedInvoice     Boolean?
+  FobType                  String?   @db.NVarChar(50)
+  FobTypeId                Int?
+  SuggestedRetailPrice     Decimal?  @db.Decimal(10, 2)
+  Brand                    String?   @db.NVarChar(Max)
+  Varietal                 String?   @db.NVarChar(Max)
+  BrandCode                String?   @db.NVarChar(Max)
+  VarietalCode             String?   @db.NVarChar(Max)
+  Notes                    String?   @db.NVarChar(Max)
+}
+
+model DealPercentOfBusiness {
+  DealPercentOfBusinessId Int      @id(map: "PK_DealPercentOfBusiness") @default(autoincrement())
+  DealId                  Int
+  Month                   Int
+  Year                    Int
+  PercentOfBusiness       Decimal? @db.Decimal(5, 2)
+  Deal                    Deal     @relation(fields: [DealId], references: [DealId], onUpdate: NoAction, map: "FK_DealPercentOfBusiness_Deal")
+}
+
+model DealProduct {
+  DealProductId           Int                       @id(map: "PK_DealProduct") @default(autoincrement())
+  DealId                  Int
+  BrandId                 Int
+  VarietalId              Int
+  VintageId               Int?
+  BottleSize              Decimal                   @db.Decimal(10, 3)
+  BottlesPerCase          Int
+  Brand                   Brand                     @relation(fields: [BrandId], references: [BrandId], onUpdate: NoAction, map: "FK_DealProduct_Brand")
+  Deal                    Deal                      @relation(fields: [DealId], references: [DealId], onUpdate: NoAction, map: "FK_DealProduct_Deal")
+  Varietal                Varietal                  @relation(fields: [VarietalId], references: [VarietalId], onUpdate: NoAction, map: "FK_DealProduct_Varietal")
+  Vintage                 Vintage?                  @relation(fields: [VintageId], references: [VintageId], onDelete: NoAction, onUpdate: NoAction, map: "FK_DealProduct_Vintage")
+  InvoiceDetailForDa      InvoiceDetailForDa[]
+  InvoiceImportMatchForDa InvoiceImportMatchForDa[]
+
+  @@index([DealProductId, DealId], map: "_dta_index_DealProduct_Deal")
+  @@index([DealId], map: "idx_DealProduct_Deal")
+  @@index([DealId], map: "idx_DealProduct_DealId")
+  @@index([BrandId, VarietalId, DealId], map: "idx_DealProduct_Product")
+}
+
+model DealType {
+  DealTypeId                           Int             @id(map: "PK_DealType") @default(autoincrement())
+  Name                                 String          @db.NVarChar(50)
+  Description                          String          @db.NVarChar(50)
+  CreatedDate                          DateTime        @db.DateTime
+  CreatedByUserId                      Int
+  ModifiedDate                         DateTime?       @db.DateTime
+  ModifiedByUserId                     Int?
+  Deal_DealType                        Deal_DealType[]
+  User_DealType_CreatedByUserIdToUser  User            @relation("DealType_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_DealType_CreatedByUser")
+  User_DealType_ModifiedByUserIdToUser User?           @relation("DealType_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_DealType_ModifiedByUser")
+
+  @@index([Name], map: "idx_DealType_Name")
+}
+
+model DealWithModifiedFobValue {
+  DealWithModifiedFobValueId                            Int       @id(map: "PK_DealWithModifiedFobValue") @default(autoincrement())
+  DealId                                                Int
+  OldFobValue                                           Decimal   @db.Decimal(10, 2)
+  NewFobValue                                           Decimal   @db.Decimal(10, 2)
+  ChangedDate                                           DateTime  @db.Date
+  ChangedByUserId                                       Int
+  ConfirmedDate                                         DateTime? @db.Date
+  ConfirmedByUserId                                     Int?
+  User_DealWithModifiedFobValue_ChangedByUserIdToUser   User      @relation("DealWithModifiedFobValue_ChangedByUserIdToUser", fields: [ChangedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_DealWithModifiedFobValue_ChangedByUser")
+  User_DealWithModifiedFobValue_ConfirmedByUserIdToUser User?     @relation("DealWithModifiedFobValue_ConfirmedByUserIdToUser", fields: [ConfirmedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_DealWithModifiedFobValue_ConfirmedByUser")
+  Deal                                                  Deal      @relation(fields: [DealId], references: [DealId], onUpdate: NoAction, map: "FK_DealWithModifiedFobValue_Deal")
+}
+
+model Distributor {
+  DistributorId                                                                              Int                           @id(map: "PK_Distributor") @default(autoincrement())
+  DistributorCode                                                                            String                        @db.NVarChar(50)
+  DistributorName                                                                            String                        @db.NVarChar(50)
+  Address                                                                                    String?                       @db.NVarChar(50)
+  City                                                                                       String?                       @db.NVarChar(50)
+  State                                                                                      String                        @db.NVarChar(20)
+  Zip                                                                                        String?                       @db.NVarChar(10)
+  Freight                                                                                    Decimal?                      @default(0, map: "DF_Distributor_Freight") @db.Decimal(10, 2)
+  IsActive                                                                                   Boolean                       @default(true, map: "DF_Distributor_IsActive")
+  CreatedDate                                                                                DateTime                      @db.DateTime
+  CreatedByUserId                                                                            Int
+  ModifiedDate                                                                               DateTime?                     @db.DateTime
+  ModifiedByUserId                                                                           Int?
+  VendorNumber                                                                               String?                       @db.NVarChar(50)
+  GlAccount                                                                                  String?                       @db.NVarChar(50)
+  GlAccountName                                                                              String?                       @db.NVarChar(50)
+  IsVendor                                                                                   Boolean                       @default(false, map: "DF__Distribut__IsVen__59FA5E80")
+  SystemState                                                                                String                        @db.NVarChar(20)
+  DistributorPriceGroupId                                                                    Int?
+  SalesPersonId                                                                              Int?
+  Region                                                                                     String?                       @db.NVarChar(200)
+  VendorDefaultDistributorId                                                                 Int?
+  InvoiceImportTemplateIdForDa                                                               Int?
+  InvoiceImportTemplateIdForExpense                                                          Int?
+  CostDistributor                                                                            CostDistributor[]
+  User_Distributor_CreatedByUserIdToUser                                                     User                          @relation("Distributor_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_Distributor_CreatedByUser")
+  DistributorPriceGroup_Distributor_DistributorPriceGroupIdToDistributorPriceGroup           DistributorPriceGroup?        @relation("Distributor_DistributorPriceGroupIdToDistributorPriceGroup", fields: [DistributorPriceGroupId], references: [DistributorPriceGroupId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Distributor_DistributorPriceGroup")
+  User_Distributor_ModifiedByUserIdToUser                                                    User?                         @relation("Distributor_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Distributor_ModifiedByUser")
+  SalesPerson                                                                                SalesPerson?                  @relation(fields: [SalesPersonId], references: [SalesPersonId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Distributor_SalesPerson")
+  InvoiceImportTemplate_Distributor_InvoiceImportTemplateIdForDaToInvoiceImportTemplate      InvoiceImportTemplate?        @relation("Distributor_InvoiceImportTemplateIdForDaToInvoiceImportTemplate", fields: [InvoiceImportTemplateIdForDa], references: [InvoiceImportTemplateId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceImportTemplateForDa")
+  InvoiceImportTemplate_Distributor_InvoiceImportTemplateIdForExpenseToInvoiceImportTemplate InvoiceImportTemplate?        @relation("Distributor_InvoiceImportTemplateIdForExpenseToInvoiceImportTemplate", fields: [InvoiceImportTemplateIdForExpense], references: [InvoiceImportTemplateId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceImportTemplateForExpense")
+  Distributor_Deal                                                                           Distributor_Deal[]
+  Distributor_Fob                                                                            Distributor_Fob[]
+  Distributor_ListPrice                                                                      Distributor_ListPrice[]
+  Distributor_Program                                                                        Distributor_Program[]
+  DistributorPriceGroup_DistributorPriceGroup_PrimaryDistributorIdToDistributor              DistributorPriceGroup[]       @relation("DistributorPriceGroup_PrimaryDistributorIdToDistributor")
+  Invoice                                                                                    Invoice[]
+  InvoiceImportForDa                                                                         InvoiceImportForDa[]
+  InvoiceImportForExpense                                                                    InvoiceImportForExpense[]
+  InvoiceProductMapForDa                                                                     InvoiceProductMapForDa[]
+  InvoiceProductMapForExpense                                                                InvoiceProductMapForExpense[]
+
+  @@index([DistributorId], map: "_dta_index_Distributor_40_757577737__K1_2_21")
+  @@index([DistributorId, DistributorPriceGroupId, State], map: "_dta_index_Distributor_40_757577737__K1_K19_K6_2_3_21")
+  @@index([State], map: "idx_Distributor_State")
+}
+
+model Distributor_Deal {
+  Id            BigInt      @id(map: "PK_Distributor_Deal") @default(autoincrement())
+  DistributorId Int
+  DealId        Int
+  Deal          Deal        @relation(fields: [DealId], references: [DealId], onUpdate: NoAction, map: "FK_Distributor_Deal_Deal")
+  Distributor   Distributor @relation(fields: [DistributorId], references: [DistributorId], onUpdate: NoAction, map: "FK_Distributor_Deal_Distributor")
+
+  @@index([DistributorId, DealId], map: "_dta_index_Distributor_Deal_49_1252915535__K2_K3")
+  @@index([DealId, DistributorId], map: "_dta_index_Distributor_Deal_49_1252915535__K3_K2")
+}
+
+model Distributor_Fob {
+  Id            Int         @id(map: "PK_Distributor_Fob") @default(autoincrement())
+  DistributorId Int
+  FobId         Int
+  Distributor   Distributor @relation(fields: [DistributorId], references: [DistributorId], onUpdate: NoAction, map: "FK_Distributor_Fob_Distributor")
+  Fob           Fob         @relation(fields: [FobId], references: [FobId], onUpdate: NoAction, map: "FK_Distributor_Fob_Fob")
+}
+
+model Distributor_ListPrice {
+  Id            BigInt      @id(map: "PK_Distributor_ListPrice") @default(autoincrement())
+  DistributorId Int
+  ListPriceId   Int
+  Distributor   Distributor @relation(fields: [DistributorId], references: [DistributorId], onUpdate: NoAction, map: "FK_Distributor_ListPrice_Distributor")
+  ListPrice     ListPrice   @relation(fields: [ListPriceId], references: [ListPriceId], onUpdate: NoAction, map: "FK_Distributor_ListPrice_ListPrice")
+}
+
+model Distributor_Program {
+  Id            Int         @id(map: "PK_Distributor_Program") @default(autoincrement())
+  DistributorId Int
+  ProgramId     Int
+  Distributor   Distributor @relation(fields: [DistributorId], references: [DistributorId], onUpdate: NoAction, map: "FK_Distributor_Program_Distributor")
+  Program       Program     @relation(fields: [ProgramId], references: [ProgramId], onUpdate: NoAction, map: "FK_Distributor_Program_Program")
+}
+
+model DistributorPriceGroup {
+  DistributorPriceGroupId                                                Int           @id(map: "PK_DistributorPriceGroup") @default(autoincrement())
+  Name                                                                   String        @db.NVarChar(200)
+  PrimaryDistributorId                                                   Int
+  Distributor_Distributor_DistributorPriceGroupIdToDistributorPriceGroup Distributor[] @relation("Distributor_DistributorPriceGroupIdToDistributorPriceGroup")
+  Distributor_DistributorPriceGroup_PrimaryDistributorIdToDistributor    Distributor   @relation("DistributorPriceGroup_PrimaryDistributorIdToDistributor", fields: [PrimaryDistributorId], references: [DistributorId], onUpdate: NoAction, map: "FK_DistributorPriceGroup_PrimaryDistributor")
+}
+
+model DistributorScopeType {
+  DistributorScopeTypeId Int         @id(map: "PK_DistributorScopeType")
+  Name                   String      @db.NVarChar(20)
+  Fob                    Fob[]
+  ListPrice              ListPrice[]
+}
+
+model Document {
+  DocumentId         Int               @id(map: "PK_Document") @default(autoincrement())
+  FileName           String            @db.NVarChar(200)
+  MimeType           String            @db.NVarChar(200)
+  DocumentBinaryGuid String            @db.UniqueIdentifier
+  CreatedDateUtc     DateTime          @db.DateTime
+  CreatedByUserId    Int
+  EmailDocument      EmailDocument[]
+  InvoiceDocument    InvoiceDocument[]
+}
+
+model Email {
+  EmailId                     BigInt            @id(map: "PK_Email") @default(autoincrement())
+  ToAddresses                 String            @db.NVarChar(Max)
+  Subject                     String            @db.NVarChar(Max)
+  HtmlBodyContent             String            @db.NVarChar(Max)
+  EmailTemplateTypeId         Int
+  LastSendAttemptTimestampUtc DateTime          @db.DateTime
+  SendAttempts                Int
+  SentTimestampUtc            DateTime?         @db.DateTime
+  LastError                   String?           @db.NVarChar(Max)
+  CcAddresses                 String?           @db.NVarChar(Max)
+  CreatedDateUtc              DateTime?         @db.DateTime
+  EmailTemplateType           EmailTemplateType @relation(fields: [EmailTemplateTypeId], references: [EmailTemplateTypeId], onUpdate: NoAction, map: "FK_Email_EmailTemplateType")
+  EmailDocument               EmailDocument[]
+  InvoiceEmail                InvoiceEmail[]
+}
+
+model EmailDocument {
+  EmailDocumentId Int      @id(map: "PK_EmailDocument") @default(autoincrement())
+  EmailId         BigInt
+  DocumentId      Int
+  Document        Document @relation(fields: [DocumentId], references: [DocumentId], onUpdate: NoAction, map: "FK_EmailDocument_Document")
+  Email           Email    @relation(fields: [EmailId], references: [EmailId], onUpdate: NoAction, map: "FK_EmailDocument_Email")
+}
+
+model EmailTemplateType {
+  EmailTemplateTypeId Int     @id(map: "PK_EmailTemplateType")
+  Name                String  @db.NVarChar(50)
+  HtmlBodyTemplate    String  @db.NVarChar(Max)
+  SubjectTemplate     String  @db.NVarChar(250)
+  Email               Email[]
+}
+
+model ExciseTax {
+  ExciseTaxId                           Int              @id(map: "PK_ExciseTax") @default(autoincrement())
+  State                                 String           @db.NVarChar(20)
+  CreatedDate                           DateTime         @db.DateTime
+  CreatedByUserId                       Int
+  ModifiedDate                          DateTime?        @db.DateTime
+  ModifiedByUserId                      Int?
+  AdditionalTax                         AdditionalTax[]
+  User_ExciseTax_CreatedByUserIdToUser  User             @relation("ExciseTax_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_ExciseTax_CreatedByUser")
+  User_ExciseTax_ModifiedByUserIdToUser User?            @relation("ExciseTax_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_ExciseTax_ModifiedByUser")
+  ExciseTaxRange                        ExciseTaxRange[]
+}
+
+model ExciseTaxRange {
+  ExciseTaxRangeId   Int          @id(map: "PK_ExciseTaxRange") @default(autoincrement())
+  ExciseTaxId        Int
+  FromAlcoholPercent Decimal?     @db.Decimal(5, 3)
+  ToAlcoholPercent   Decimal?     @db.Decimal(5, 3)
+  TaxAmount          Decimal      @db.Decimal(6, 3)
+  ProductTypeId      Int?
+  ExciseTax          ExciseTax    @relation(fields: [ExciseTaxId], references: [ExciseTaxId], onUpdate: NoAction, map: "FK_ExciseTax_ExciseTaxRange")
+  ProductType        ProductType? @relation(fields: [ProductTypeId], references: [ProductTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_ExciseTaxRange_ProductType")
+}
+
+model ExpenseType {
+  ExpenseTypeId                           Int                                 @id(map: "PK_ExpenseType") @default(autoincrement())
+  Name                                    String                              @db.NVarChar(50)
+  GlAccount                               String                              @db.NVarChar(50)
+  IsBrandRequired                         Boolean                             @default(false, map: "DF_Table_1_BrandCodeRequired")
+  IsVarietalRequired                      Boolean                             @default(false, map: "DF_ExpenseType_IsAppellationCodeRequired")
+  CreatedDate                             DateTime                            @db.DateTime
+  CreatedByUserId                         Int
+  ModifiedDate                            DateTime?                           @db.DateTime
+  ModifiedByUserId                        Int?
+  UsesQuantity                            Boolean                             @default(false, map: "DF_ExpenseType_UsesQuantity")
+  UsesVintage                             Boolean                             @default(false, map: "DF__ExpenseTy__UsesV__0A338187")
+  IsQuantityRequired                      Boolean                             @default(false, map: "DF__ExpenseTy__IsQua__0C1BC9F9")
+  IsActive                                Boolean                             @default(true, map: "DF__ExpenseTy__IsAct__0B27A5C0")
+  User_ExpenseType_CreatedByUserIdToUser  User                                @relation("ExpenseType_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_ExpenseType_CreatedByUser")
+  User_ExpenseType_ModifiedByUserIdToUser User?                               @relation("ExpenseType_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_ExpenseType_ModifiedUser")
+  InvoiceDetailForExpense                 InvoiceDetailForExpense[]
+  InvoiceProductMapForExpense             InvoiceProductMapForExpense[]
+  InvoiceSubmissionDetailForExpense       InvoiceSubmissionDetailForExpense[]
+  ProgramType_ExpenseType                 ProgramType_ExpenseType[]
+}
+
+model Fob {
+  FobId                           Int                  @id(map: "PK_Fob") @default(autoincrement())
+  DistributorScopeTypeId          Int
+  ProductGroupId                  Int?
+  FobTypeId                       Int
+  CreatedByUserId                 Int
+  ModifiedByUserId                Int?
+  CreatedDate                     DateTime             @db.DateTime
+  ModifiedDate                    DateTime?            @db.DateTime
+  Distributor_Fob                 Distributor_Fob[]
+  User_Fob_CreatedByUserIdToUser  User                 @relation("Fob_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_Fob_CreatedByUser")
+  DistributorScopeType            DistributorScopeType @relation(fields: [DistributorScopeTypeId], references: [DistributorScopeTypeId], onUpdate: NoAction, map: "FK_Fob_DistributorScopeType")
+  User_Fob_ModifiedByUserIdToUser User?                @relation("Fob_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Fob_ModifiedByUser")
+  ProductGroup                    ProductGroup?        @relation(fields: [ProductGroupId], references: [ProductGroupId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Fob_ProductGroup")
+  FobProduct                      FobProduct[]
+  FobValue                        FobValue[]
+}
+
+model FobList {
+  FobId                   Int     @id(map: "PK_FobList")
+  State                   String? @db.NVarChar(20)
+  DistributorName         String  @db.NVarChar(253)
+  Label                   String? @db.NVarChar(Max)
+  Pack                    String  @db.VarChar(8000)
+  FobType                 String  @db.NVarChar(50)
+  BrandIds                String  @db.NVarChar(Max)
+  VarietalIds             String  @db.NVarChar(Max)
+  DistributorId           Int?
+  DistributorCode         String? @db.NVarChar(50)
+  DistributorPriceGroupId Int?
+  Region                  String? @db.NVarChar(200)
+  Value                   Decimal @db.Decimal(10, 2)
+  ProductGroupId          Int?
+  FobTypeId               Int
+}
+
+model FobProduct {
+  FobProductId   Int      @id(map: "PK_FobProduct") @default(autoincrement())
+  FobId          Int
+  BrandId        Int
+  VarietalId     Int
+  VintageId      Int?
+  BottleSize     Decimal  @db.Decimal(10, 3)
+  BottlesPerCase Int
+  Brand          Brand    @relation(fields: [BrandId], references: [BrandId], onUpdate: NoAction, map: "FK_FobProduct_Brand")
+  Fob            Fob      @relation(fields: [FobId], references: [FobId], onUpdate: NoAction, map: "FK_FobProduct_Fob")
+  Varietal       Varietal @relation(fields: [VarietalId], references: [VarietalId], onUpdate: NoAction, map: "FK_FobProduct_Varietal")
+  Vintage        Vintage? @relation(fields: [VintageId], references: [VintageId], onDelete: NoAction, onUpdate: NoAction, map: "FK_FobProduct_Vintage")
+}
+
+model FobType {
+  FobTypeId  Int     @id(map: "PK_FobType") @default(autoincrement())
+  Name       String  @db.NVarChar(50)
+  IsActive   Boolean @default(true, map: "DF__FobType__IsActiv__10E07F16")
+  IsEditable Boolean @default(false, map: "DF__FobType__IsEdita__0FEC5ADD")
+  Cost       Cost[]
+}
+
+model FobValue {
+  FobValueId                           Int         @id(map: "PK_FobValue") @default(autoincrement())
+  FobId                                Int
+  Value                                Decimal     @db.Decimal(10, 2)
+  StartDate                            DateTime?   @db.Date
+  EndDate                              DateTime?   @db.Date
+  CreatedDate                          DateTime    @db.DateTime
+  CreatedByUserId                      Int
+  ModifiedDate                         DateTime?   @db.DateTime
+  ModifiedByUserId                     Int?
+  Deal                                 Deal[]
+  User_FobValue_CreatedByUserIdToUser  User        @relation("FobValue_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_FobValue_CreatedByUser")
+  Fob                                  Fob         @relation(fields: [FobId], references: [FobId], onUpdate: NoAction, map: "FK_FobValue_Fob")
+  User_FobValue_ModifiedByUserIdToUser User?       @relation("FobValue_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_FobValue_ModifiedByUser")
+  ListPrice                            ListPrice[]
+}
+
+model FobValueAudit {
+  FobValueAuditId Int       @id(map: "PK_FobValueAudit") @default(autoincrement())
+  FobId           Int
+  FobValueId      Int
+  Value           Decimal   @db.Decimal(18, 2)
+  StartDate       DateTime? @db.Date
+  EndDate         DateTime? @db.Date
+  UserId          Int
+  SavedDate       DateTime  @db.DateTime
+}
+
+model GlAccount {
+  GlAccountId                           BigInt    @id(map: "PK_GlAccount") @default(autoincrement())
+  Name                                  String    @db.NVarChar(50)
+  Account                               String    @db.NVarChar(50)
+  IsActive                              Boolean   @default(true, map: "DF_GlAccount_IsActive")
+  CreatedDate                           DateTime  @db.DateTime
+  CreatedByUserId                       Int
+  ModifiedDate                          DateTime? @db.DateTime
+  ModifiedByUserId                      Int?
+  User_GlAccount_CreatedByUserIdToUser  User      @relation("GlAccount_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_GlAccount_CreatedByUser")
+  User_GlAccount_ModifiedByUserIdToUser User?     @relation("GlAccount_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_GlAccount_ModifiedByUser")
+}
+
+model Invoice {
+  InvoiceId                            Int                       @id(map: "PK_Invoice") @default(autoincrement())
+  YearMonth                            Int
+  InvoiceNumber                        String?                   @db.NVarChar(50)
+  InvoiceNumberSequence                Int?
+  InvoiceDate                          DateTime?                 @db.Date
+  DueDate                              DateTime?                 @db.Date
+  CreatedDate                          DateTime                  @db.DateTime
+  CreatedByUserId                      Int
+  ModifiedDate                         DateTime?                 @db.DateTime
+  ModifiedByUserId                     Int?
+  SubmittedDate                        DateTime?                 @db.DateTime
+  SubmittedByUserId                    Int?
+  InvoiceSubmissionId                  Int?
+  DistributorId                        Int
+  InvoiceIntentTypeId                  Int
+  EnteredTotal                         Decimal?                  @db.Decimal(10, 2)
+  InvoiceStatusTypeId                  Int                       @default(1, map: "DF_Invoice_InvoiceStatusTypeId")
+  Note                                 String?                   @db.NVarChar(Max)
+  PaidDate                             DateTime?                 @db.Date
+  PaidAmount                           Decimal?                  @db.Decimal(10, 2)
+  VendorNumber                         String?                   @db.NVarChar(50)
+  VendorAssociatedDistributorId        Int?
+  CheckNumber                          String?                   @db.NVarChar(50)
+  Distributor                          Distributor               @relation(fields: [DistributorId], references: [DistributorId], onUpdate: NoAction, map: "FK_Invoice_Distributor")
+  InvoiceIntentType                    InvoiceIntentType         @relation(fields: [InvoiceIntentTypeId], references: [InvoiceIntentTypeId], onUpdate: NoAction, map: "FK_Invoice_InvoiceIntentType")
+  InvoiceStatusType                    InvoiceStatusType         @relation(fields: [InvoiceStatusTypeId], references: [InvoiceStatusTypeId], onUpdate: NoAction, map: "FK_Invoice_InvoiceStatusType")
+  InvoiceSubmission                    InvoiceSubmission?        @relation(fields: [InvoiceSubmissionId], references: [InvoiceSubmissionId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Invoice_InvoiceSubmission")
+  User_Invoice_ModifiedByUserIdToUser  User?                     @relation("Invoice_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Invoice_ModifiedByUser")
+  User_Invoice_CreatedByUserIdToUser   User                      @relation("Invoice_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_Table_1_CreatedByUser")
+  User_Invoice_SubmittedByUserIdToUser User?                     @relation("Invoice_SubmittedByUserIdToUser", fields: [SubmittedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Table_1_SubmittedByUser")
+  InvoiceAudit                         InvoiceAudit[]
+  InvoiceDetailForDa                   InvoiceDetailForDa[]
+  InvoiceDetailForExpense              InvoiceDetailForExpense[]
+  InvoiceDocument                      InvoiceDocument[]
+  InvoiceEmail                         InvoiceEmail[]
+  InvoiceImportMatchForDa              InvoiceImportMatchForDa[]
+
+  @@index([DistributorId, SubmittedDate], map: "idx_Invoice_Distributor")
+  @@index([InvoiceStatusTypeId, DueDate], map: "idxInvoiceDueDate")
+}
+
+model InvoiceAudit {
+  InvoiceAuditId                                                           BigInt             @id(map: "PK_InvoiceAudit") @default(autoincrement())
+  InvoiceId                                                                Int
+  NewInvoiceStatusTypeId                                                   Int
+  Note                                                                     String?            @db.NVarChar(Max)
+  OldInvoiceStatusTypeId                                                   Int?
+  SavedByUserId                                                            Int
+  SavedDateUtc                                                             DateTime           @db.DateTime
+  Invoice                                                                  Invoice            @relation(fields: [InvoiceId], references: [InvoiceId], onUpdate: NoAction, map: "FK_InvoiceAudit_Invoice")
+  InvoiceStatusType_InvoiceAudit_NewInvoiceStatusTypeIdToInvoiceStatusType InvoiceStatusType  @relation("InvoiceAudit_NewInvoiceStatusTypeIdToInvoiceStatusType", fields: [NewInvoiceStatusTypeId], references: [InvoiceStatusTypeId], onUpdate: NoAction, map: "FK_InvoiceAudit_NewInvoiceStatusType")
+  InvoiceStatusType_InvoiceAudit_OldInvoiceStatusTypeIdToInvoiceStatusType InvoiceStatusType? @relation("InvoiceAudit_OldInvoiceStatusTypeIdToInvoiceStatusType", fields: [OldInvoiceStatusTypeId], references: [InvoiceStatusTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceAudit_OldInvoiceStatusType")
+  User                                                                     User               @relation(fields: [SavedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_InvoiceAudit_SavedByUser")
+}
+
+model InvoiceDetailForDa {
+  InvoiceDetailForDaId       Int         @id(map: "PK_InvoiceDetailDa") @default(autoincrement())
+  InvoiceId                  Int
+  DepletionAllowanceQuantity Decimal     @db.Decimal(12, 5)
+  DaValueWhenSubmitted       Decimal?    @db.Decimal(10, 2)
+  DealProductId              Int
+  DealProduct                DealProduct @relation(fields: [DealProductId], references: [DealProductId], onUpdate: NoAction, map: "FK_InvoiceDetailDa_DealProduct")
+  Invoice                    Invoice     @relation(fields: [InvoiceId], references: [InvoiceId], onUpdate: NoAction, map: "FK_InvoiceDetailForDa_Invoice")
+
+  @@index([DealProductId, InvoiceId], map: "_dta_index_InvoiceDetailForDa_Invoice")
+  @@index([InvoiceId], map: "_idx_InvoiceDetailForDa_DepletionAllowanceQuantity_DaValueWhenSubmitted")
+}
+
+model InvoiceDetailForExpense {
+  InvoiceDetailForExpenseId Int         @id(map: "PK_InvoiceDetailForExpense") @default(autoincrement())
+  InvoiceId                 Int
+  ExpenseTypeId             Int
+  Amount                    Decimal     @db.Decimal(18, 2)
+  BrandId                   Int?
+  VarietalId                Int?
+  Note                      String?     @db.NVarChar(400)
+  Quantity                  Float?
+  ProgramId                 Int?
+  VintageId                 Int?
+  Brand                     Brand?      @relation(fields: [BrandId], references: [BrandId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceDetailForExpense_Brand")
+  ExpenseType               ExpenseType @relation(fields: [ExpenseTypeId], references: [ExpenseTypeId], onUpdate: NoAction, map: "FK_InvoiceDetailForExpense_ExpenseType")
+  Invoice                   Invoice     @relation(fields: [InvoiceId], references: [InvoiceId], onUpdate: NoAction, map: "FK_InvoiceDetailForExpense_Invoice")
+  Program                   Program?    @relation(fields: [ProgramId], references: [ProgramId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceDetailForExpense_Program")
+  Varietal                  Varietal?   @relation(fields: [VarietalId], references: [VarietalId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceDetailForExpense_Varietal")
+  Vintage                   Vintage?    @relation(fields: [VintageId], references: [VintageId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceDetailForExpense_Vintage")
+
+  @@index([InvoiceId], map: "_idxInvoiceDetailForExpense_Amount")
+  @@index([InvoiceId], map: "idx_InvoiceDetailForExpense")
+}
+
+model InvoiceDocument {
+  InvoiceDocumentId Int      @id(map: "PK_InvoiceDocument") @default(autoincrement())
+  InvoiceId         Int
+  DocumentId        Int
+  Document          Document @relation(fields: [DocumentId], references: [DocumentId], onUpdate: NoAction, map: "FK_InvoiceDocument_Document")
+  Invoice           Invoice  @relation(fields: [InvoiceId], references: [InvoiceId], onUpdate: NoAction, map: "FK_InvoiceDocument_Invoice")
+}
+
+model InvoiceEmail {
+  InvoiceEmailId Int     @id(map: "PK_InvoiceEmail") @default(autoincrement())
+  InvoiceId      Int
+  EmailId        BigInt
+  Email          Email   @relation(fields: [EmailId], references: [EmailId], onUpdate: NoAction, map: "FK_InvoiceEmail_Email")
+  Invoice        Invoice @relation(fields: [InvoiceId], references: [InvoiceId], onUpdate: NoAction, map: "FK_InvoiceEmail_Invoice")
+}
+
+model InvoiceImportForDa {
+  InvoiceImportForDaId     Int         @id(map: "PK_InvoiceImportForDa") @default(autoincrement())
+  InvoiceImportTemplateId  Int
+  ProductDescription       String      @db.NVarChar(250)
+  DistributorProductNumber String?     @db.NVarChar(50)
+  YearMonth                Int
+  CasesSold                Decimal     @db.Decimal(10, 5)
+  CasePriceToRetailer      Decimal     @db.Decimal(10, 2)
+  Da                       Decimal?    @db.Decimal(10, 2)
+  BottlesPerCase           Int
+  BottleSize               Decimal     @db.Decimal(10, 3)
+  PremiseType              String?     @db.VarChar(3)
+  CreatedUtc               DateTime    @db.DateTime
+  DistributorId            Int
+  BrandId                  Int?
+  VarietalId               Int?
+  VintageId                Int?
+  ItemCode                 String?     @db.NVarChar(50)
+  RetailSaleDate           DateTime?   @db.Date
+  RetailSaleInvoiceNumber  String?     @db.NVarChar(50)
+  RetailCustomerNumber     String?     @db.NVarChar(50)
+  RetailCustomerName       String?     @db.NVarChar(250)
+  CreatedByUserId          Int         @default(0, map: "DF_InvoiceImportForDa_CreatedByUserId")
+  Brand                    Brand?      @relation(fields: [BrandId], references: [BrandId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceImportForDa_Brand")
+  User                     User        @relation(fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_InvoiceImportForDa_CreatedByUser")
+  Distributor              Distributor @relation(fields: [DistributorId], references: [DistributorId], onUpdate: NoAction, map: "FK_InvoiceImportForDa_Distributor")
+  Varietal                 Varietal?   @relation(fields: [VarietalId], references: [VarietalId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceImportForDa_Varietal")
+  Vintage                  Vintage?    @relation(fields: [VintageId], references: [VintageId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceImportForDa_Vintage")
+}
+
+model InvoiceImportForExpense {
+  InvoiceImportForExpenseId Int         @id(map: "PK_InvoiceImportForExpense") @default(autoincrement())
+  InvoiceImportTemplateId   Int
+  YearMonth                 Int
+  DistributorId             Int
+  ExpenseTypeId             Int?
+  ExpenseDescription        String      @db.NVarChar(250)
+  Note                      String      @db.NVarChar(400)
+  Amount                    Decimal     @db.Decimal(18, 2)
+  DistributorProductNumber  String?     @db.NVarChar(50)
+  ProductDescription        String      @db.NVarChar(250)
+  BrandId                   Int?
+  VarietalId                Int?
+  VintageId                 Int?
+  BottlesPerCase            Int?
+  BottleQuantity            Float?
+  RetailCustomerNumber      String?     @db.NVarChar(50)
+  RetailCustomerName        String?     @db.NVarChar(250)
+  RetailSaleDate            DateTime?   @db.Date
+  RetailSaleInvoiceNumber   String?     @db.NVarChar(50)
+  CreatedByUserId           Int         @default(0, map: "DF_InvoiceImportForExpense_CreatedByUserId")
+  CreatedUtc                DateTime    @db.DateTime
+  Brand                     Brand?      @relation(fields: [BrandId], references: [BrandId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceImportForExpense_Brand")
+  User                      User        @relation(fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_InvoiceImportForExpense_CreatedByUser")
+  Distributor               Distributor @relation(fields: [DistributorId], references: [DistributorId], onUpdate: NoAction, map: "FK_InvoiceImportForExpense_Distributor")
+  Varietal                  Varietal?   @relation(fields: [VarietalId], references: [VarietalId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceImportForExpense_Varietal")
+}
+
+model InvoiceImportMatchForDa {
+  InvoiceImportMatchForDaId          BigInt       @id(map: "PK_InvoiceImportMatchForDa") @default(autoincrement())
+  InvoiceId                          Int
+  IsAutoMatch                        Boolean
+  BrandName                          String       @db.NVarChar(50)
+  VarietalName                       String       @db.NVarChar(50)
+  BottleSize                         Decimal      @db.Decimal(10, 3)
+  BottlesPerCase                     Int
+  PriceToRetailer                    Decimal      @db.Decimal(10, 2)
+  DealPriceToRetailerPercentVariance Decimal?     @db.Decimal(10, 2)
+  IsMatchingComplete                 Boolean
+  CasesSold                          Decimal      @db.Decimal(10, 5)
+  PremiseType                        String?      @db.VarChar(3)
+  BrandId                            Int
+  VarietalId                         Int
+  VintageId                          Int?
+  Da                                 Decimal?     @db.Decimal(10, 2)
+  DealProductId                      Int?
+  DealProduct                        DealProduct? @relation(fields: [DealProductId], references: [DealProductId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceImportMatch_DealProduct")
+  Invoice                            Invoice      @relation(fields: [InvoiceId], references: [InvoiceId], onUpdate: NoAction, map: "FK_InvoiceImportMatch_Invoice")
+}
+
+model InvoiceImportTemplate {
+  InvoiceImportTemplateId                                                          Int                           @id(map: "PK_InvoiceImportTemplate") @default(autoincrement())
+  Name                                                                             String                        @db.NVarChar(50)
+  TestPassed                                                                       Boolean
+  SettingsJson                                                                     String                        @db.NVarChar(Max)
+  CreatedDateUtc                                                                   DateTime                      @db.DateTime
+  CreatedByUserId                                                                  Int
+  ModifiedDateUtc                                                                  DateTime?                     @db.DateTime
+  ModifiedByUserId                                                                 Int?
+  DocumentBinaryGuid                                                               String?                       @db.UniqueIdentifier
+  FileNameWithoutExtension                                                         String?                       @db.NVarChar(200)
+  FileExtension                                                                    String?                       @db.NVarChar(5)
+  MimeType                                                                         String?                       @db.NVarChar(200)
+  InvoiceImportTemplateTypeId                                                      Int                           @default(1, map: "DF__InvoiceIm__Invoi__15A53433")
+  Distributor_Distributor_InvoiceImportTemplateIdForDaToInvoiceImportTemplate      Distributor[]                 @relation("Distributor_InvoiceImportTemplateIdForDaToInvoiceImportTemplate")
+  Distributor_Distributor_InvoiceImportTemplateIdForExpenseToInvoiceImportTemplate Distributor[]                 @relation("Distributor_InvoiceImportTemplateIdForExpenseToInvoiceImportTemplate")
+  InvoiceImportTemplateType                                                        InvoiceImportTemplateType     @relation(fields: [InvoiceImportTemplateTypeId], references: [InvoiceImportTemplateTypeId], onUpdate: NoAction, map: "FK_InvoiceImportTemplate_InvoiceImportTemplateType")
+  InvoiceProductMapForDa                                                           InvoiceProductMapForDa[]
+  InvoiceProductMapForExpense                                                      InvoiceProductMapForExpense[]
+}
+
+model InvoiceImportTemplateDocument {
+  InvoiceImportTemplateDocumentId Int    @id(map: "PK_InvoiceImportTemplateDocument") @default(autoincrement())
+  DocumentBinaryGuid              String @db.UniqueIdentifier
+  FileBytes                       Bytes
+}
+
+model InvoiceImportTemplateType {
+  InvoiceImportTemplateTypeId Int                     @id(map: "PK_InvoiceImportTemplateType")
+  Name                        String                  @db.NVarChar(50)
+  InvoiceImportTemplate       InvoiceImportTemplate[]
+}
+
+model InvoiceIntentType {
+  InvoiceIntentTypeId Int       @id(map: "PK_InvoiceIntentType")
+  Name                String    @db.NVarChar(50)
+  Description         String    @db.NVarChar(50)
+  CreatedDate         DateTime  @db.DateTime
+  CreatedByUserId     Int
+  ModifiedDate        DateTime? @db.DateTime
+  ModifiedByUserId    Int?
+  Invoice             Invoice[]
+}
+
+model InvoiceProductMapForDa {
+  InvoiceProductMapForDaId Int                   @id(map: "PK_InvoiceProductMapForDa") @default(autoincrement())
+  InvoiceImportTemplateId  Int
+  DistributorId            Int
+  ProductDescription       String                @db.NVarChar(250)
+  DistributorProductNumber String?               @db.NVarChar(50)
+  BrandId                  Int
+  VarietalId               Int
+  VintageId                Int?
+  BottleSize               Decimal               @db.Decimal(10, 3)
+  BottlesPerCase           Int
+  Brand                    Brand                 @relation(fields: [BrandId], references: [BrandId], onUpdate: NoAction, map: "FK_InvoiceProductMapForDa_Brand")
+  Distributor              Distributor           @relation(fields: [DistributorId], references: [DistributorId], onUpdate: NoAction, map: "FK_InvoiceProductMapForDa_Distributor")
+  InvoiceImportTemplate    InvoiceImportTemplate @relation(fields: [InvoiceImportTemplateId], references: [InvoiceImportTemplateId], onUpdate: NoAction, map: "FK_InvoiceProductMapForDa_InvoiceImportTemplate")
+  Varietal                 Varietal              @relation(fields: [VarietalId], references: [VarietalId], onUpdate: NoAction, map: "FK_InvoiceProductMapForDa_Varietal")
+  Vintage                  Vintage?              @relation(fields: [VintageId], references: [VintageId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceProductMapForDa_Vintage")
+}
+
+model InvoiceProductMapForExpense {
+  InvoiceProductMapForExpenseId Int                   @id(map: "PK_InvoiceProductMapForExpense") @default(autoincrement())
+  InvoiceImportTemplateId       Int
+  DistributorId                 Int
+  ProductDescription            String                @db.NVarChar(250)
+  ExpenseTypeId                 Int
+  DistributorProductNumber      String?               @db.NVarChar(50)
+  BrandId                       Int?
+  VarietalId                    Int?
+  VintageId                     Int?
+  ExpenseDescription            String                @db.NVarChar(250)
+  Brand                         Brand?                @relation(fields: [BrandId], references: [BrandId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceProductMapForExpense_Brand")
+  Distributor                   Distributor           @relation(fields: [DistributorId], references: [DistributorId], onUpdate: NoAction, map: "FK_InvoiceProductMapForExpense_Distributor")
+  ExpenseType                   ExpenseType           @relation(fields: [ExpenseTypeId], references: [ExpenseTypeId], onUpdate: NoAction, map: "FK_InvoiceProductMapForExpense_ExpenseType")
+  InvoiceImportTemplate         InvoiceImportTemplate @relation(fields: [InvoiceImportTemplateId], references: [InvoiceImportTemplateId], onUpdate: NoAction, map: "FK_InvoiceProductMapForExpense_InvoiceImportTemplate")
+  Varietal                      Varietal?             @relation(fields: [VarietalId], references: [VarietalId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceProductMapForExpense_Varietal")
+  Vintage                       Vintage?              @relation(fields: [VintageId], references: [VintageId], onDelete: NoAction, onUpdate: NoAction, map: "FK_InvoiceProductMapForExpense_Vintage")
+}
+
+model InvoiceStatusType {
+  InvoiceStatusTypeId                                                 Int                               @id(map: "PK_InvoiceStatus")
+  Description                                                         String                            @db.NVarChar(50)
+  IsActive                                                            Boolean                           @default(false, map: "DF_InvoiceStatusType_IsActive")
+  Color                                                               String                            @default("N'#D7DBDD'", map: "DF_InvoiceStatusType_Color") @db.NChar(7)
+  IsCustomizable                                                      Boolean                           @default(true, map: "DF_InvoiceStatusType_IsCustomizable")
+  SortOrder                                                           Int                               @default(0, map: "DF_InvoiceStatusType_SortOrder")
+  Invoice                                                             Invoice[]
+  InvoiceAudit_InvoiceAudit_NewInvoiceStatusTypeIdToInvoiceStatusType InvoiceAudit[]                    @relation("InvoiceAudit_NewInvoiceStatusTypeIdToInvoiceStatusType")
+  InvoiceAudit_InvoiceAudit_OldInvoiceStatusTypeIdToInvoiceStatusType InvoiceAudit[]                    @relation("InvoiceAudit_OldInvoiceStatusTypeIdToInvoiceStatusType")
+  SecurityGroup_InvoiceStatusType                                     SecurityGroup_InvoiceStatusType[]
+}
+
+model InvoiceSubmission {
+  InvoiceSubmissionId               Int                                 @id(map: "PK_InvoiceSubmission") @default(autoincrement())
+  DistributorCode                   String                              @db.NVarChar(50)
+  YearMonth                         Int
+  InvoiceNumber                     String                              @db.NVarChar(50)
+  InvoiceTotal                      Decimal                             @db.Decimal(18, 2)
+  InvoiceDate                       DateTime                            @db.Date
+  DueDate                           DateTime?                           @db.Date
+  SubmittedByUserId                 Int
+  SubmittedDate                     DateTime                            @db.DateTime
+  TransferredToAccountingSystemDate DateTime?                           @db.DateTime
+  ToBePaidByAP                      Boolean
+  ToBeDeductedByAR                  Boolean
+  InvoiceUrl                        String?                             @db.NVarChar(200)
+  VendorNumber                      String?                             @db.NVarChar(50)
+  Invoice                           Invoice[]
+  InvoiceSubmissionDetailForDa      InvoiceSubmissionDetailForDa[]
+  InvoiceSubmissionDetailForExpense InvoiceSubmissionDetailForExpense[]
+}
+
+model InvoiceSubmissionDetailForDa {
+  InvoiceSubmissionDetailForDaId Int               @id(map: "PK_InvoiceSubmissionDetailForDa") @default(autoincrement())
+  InvoiceSubmissionId            Int
+  BrandCode                      String            @db.NVarChar(50)
+  VarietalCode                   String            @db.NVarChar(50)
+  Amount                         Decimal           @db.Decimal(18, 2)
+  GlAccount                      String            @db.NVarChar(50)
+  DepletionAllowanceQuantity     Decimal           @db.Decimal(12, 5)
+  Vintage                        String?           @db.NVarChar(50)
+  InvoiceSubmission              InvoiceSubmission @relation(fields: [InvoiceSubmissionId], references: [InvoiceSubmissionId], onUpdate: NoAction, map: "FK_InvoiceSubmissionDetailForDa_InvoiceSubmission")
+}
+
+model InvoiceSubmissionDetailForExpense {
+  InvoiceSubmissionDetailForExpenseId Int               @id(map: "PK_InvoiceSubmissionDetailForExpense") @default(autoincrement())
+  InvoiceSubmissionId                 Int
+  GlAccount                           String            @db.NVarChar(50)
+  BrandCode                           String?           @db.NVarChar(50)
+  VarietalCode                        String?           @db.NVarChar(50)
+  Amount                              Decimal           @db.Decimal(18, 2)
+  ExpenseTypeName                     String?           @db.NVarChar(50)
+  ExpenseTypeId                       Int
+  InvoiceDetailForExpenseId           Int?
+  Quantity                            Float?
+  ProgramId                           Int?
+  ProgramName                         String?           @db.NVarChar(50)
+  Vintage                             String?           @db.NVarChar(50)
+  ExpenseType                         ExpenseType       @relation(fields: [ExpenseTypeId], references: [ExpenseTypeId], onUpdate: NoAction, map: "FK_InvoiceSubmissionDetailForExpense_ExpenseType")
+  InvoiceSubmission                   InvoiceSubmission @relation(fields: [InvoiceSubmissionId], references: [InvoiceSubmissionId], onUpdate: NoAction, map: "FK_InvoiceSubmissionDetailForExpense_InvoiceSubmission")
+}
+
+model ItemMaster {
+  ItemMasterId          BigInt   @id(map: "PK_ItemMaster") @default(autoincrement())
+  ItemCode              String?  @db.NVarChar(50)
+  BrandCode             String?  @db.NVarChar(50)
+  VarietalCode          String?  @db.NVarChar(50)
+  Vintage               String?  @db.NVarChar(50)
+  BottleSize            Decimal? @db.Decimal(10, 3)
+  BottlesPerCase        Int?
+  ShippingContainerCode String?  @db.NVarChar(14)
+  AlcoholPercent        Decimal? @db.Decimal(3, 1)
+  ProductTypeId         Int?
+  LabelNonVintage       String?  @db.NVarChar(50)
+  Description           String?  @db.NVarChar(250)
+}
+
+model ListPrice {
+  ListPriceId                           Int                     @id(map: "PK_ListPrice") @default(autoincrement())
+  FobPrice                              Decimal                 @db.Decimal(10, 2)
+  PriceToRetailer                       Decimal                 @db.Decimal(10, 2)
+  SuggestedRetailPrice                  Decimal?                @db.Decimal(10, 2)
+  CreatedDate                           DateTime                @db.DateTime
+  CreatedByUserId                       Int
+  ModifiedDate                          DateTime?               @db.DateTime
+  ModifiedByUserId                      Int?
+  CaseOnePriceToRetailer                Decimal?                @db.Decimal(10, 2)
+  CaseOneSuggestedRetailPrice           Decimal?                @db.Decimal(10, 2)
+  FobValueId                            Int?
+  DistributorScopeTypeId                Int
+  ProductGroupId                        Int?
+  Distributor_ListPrice                 Distributor_ListPrice[]
+  User_ListPrice_CreatedByUserIdToUser  User                    @relation("ListPrice_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_ListPrice_CreatedByUser")
+  DistributorScopeType                  DistributorScopeType    @relation(fields: [DistributorScopeTypeId], references: [DistributorScopeTypeId], onUpdate: NoAction, map: "FK_ListPrice_DistributorScopeType")
+  FobValue                              FobValue?               @relation(fields: [FobValueId], references: [FobValueId], onDelete: NoAction, onUpdate: NoAction, map: "FK_ListPrice_FobValue")
+  User_ListPrice_ModifiedByUserIdToUser User?                   @relation("ListPrice_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_ListPrice_ModifiedByUser")
+  ProductGroup                          ProductGroup?           @relation(fields: [ProductGroupId], references: [ProductGroupId], onDelete: NoAction, onUpdate: NoAction, map: "FK_ListPrice_ProductGroup")
+  ListPriceProduct                      ListPriceProduct[]
+}
+
+model ListPriceList {
+  ListPriceId             Int       @id(map: "PK_ListPriceList")
+  State                   String?   @db.NVarChar(20)
+  DistributorName         String    @db.NVarChar(253)
+  Label                   String?   @db.NVarChar(Max)
+  Pack                    String    @db.VarChar(8000)
+  PriceToRetailer         Decimal   @db.Decimal(10, 2)
+  FobPrice                Decimal   @db.Decimal(10, 2)
+  FobType                 String?   @db.NVarChar(50)
+  FobStartDate            DateTime? @db.Date
+  FobEndDate              DateTime? @db.Date
+  BrandIds                String    @db.NVarChar(Max)
+  VarietalIds             String    @db.NVarChar(Max)
+  DistributorId           Int?
+  DistributorCode         String?   @db.NVarChar(50)
+  DistributorPriceGroupId Int?
+  Region                  String?   @db.NVarChar(200)
+  ProductGroupId          Int?
+  FobTypeId               Int?
+  FobValueId              Int?
+}
+
+model ListPriceProduct {
+  ListPriceProductId Int       @id(map: "PK_ListPriceProduct") @default(autoincrement())
+  ListPriceId        Int
+  BrandId            Int
+  VarietalId         Int
+  VintageId          Int?
+  BottleSize         Decimal   @db.Decimal(10, 3)
+  BottlesPerCase     Int
+  Brand              Brand     @relation(fields: [BrandId], references: [BrandId], onUpdate: NoAction, map: "FK_ListPriceProduct_Brand")
+  ListPrice          ListPrice @relation(fields: [ListPriceId], references: [ListPriceId], onUpdate: NoAction, map: "FK_ListPriceProduct_ListPrice")
+  Varietal           Varietal  @relation(fields: [VarietalId], references: [VarietalId], onUpdate: NoAction, map: "FK_ListPriceProduct_Varietal")
+  Vintage            Vintage?  @relation(fields: [VintageId], references: [VintageId], onDelete: NoAction, onUpdate: NoAction, map: "FK_ListPriceProduct_Vintage")
+}
+
+model NationalAccountDealType {
+  NationalAccountDealTypeId Int                 @id(map: "PK_NationalAccountDealType") @default(autoincrement())
+  Name                      String              @db.NVarChar(50)
+  NationalAccountTypeId     Int
+  DisplayOrder              Int                 @default(0, map: "DF__NationalA__Displ__1A69E950")
+  Deal                      Deal[]
+  NationalAccountType       NationalAccountType @relation(fields: [NationalAccountTypeId], references: [NationalAccountTypeId], onUpdate: NoAction, map: "FK_NationalAccountDealType_NationalAccountType")
+}
+
+model NationalAccountType {
+  NationalAccountTypeId   Int                       @id(map: "PK_NationalAccountType") @default(autoincrement())
+  Name                    String                    @db.NVarChar(100)
+  IsCalendarized          Boolean                   @default(false, map: "DF__NationalA__IsCal__1C5231C2")
+  PremiseTypeId           Int                       @default(1, map: "DF__NationalA__Premi__1B5E0D89")
+  NationalAccountDealType NationalAccountDealType[]
+  PremiseType             PremiseType               @relation(fields: [PremiseTypeId], references: [PremiseTypeId], onUpdate: NoAction, map: "FK_NationalAccountType_PremiseType")
+  State                   State[]
+}
+
+model Notification {
+  NotificationId     BigInt             @id(map: "PK_Notification") @default(autoincrement())
+  NotificationTypeId Int
+  Json               String             @db.NVarChar(Max)
+  CreatedDateUtc     DateTime           @db.DateTime
+  NotificationType   NotificationType   @relation(fields: [NotificationTypeId], references: [NotificationTypeId], onUpdate: NoAction, map: "FK_Notification_NotificationType")
+  UserNotification   UserNotification[]
+}
+
+model NotificationType {
+  NotificationTypeId Int            @id(map: "PK_NotificationType")
+  Name               String         @db.NVarChar(50)
+  Notification       Notification[]
+}
+
+model PersistentCache {
+  PersistentCacheId BigInt    @id(map: "PK__Persiste__6F289029EC9E5A8F") @default(autoincrement())
+  CacheKey          String    @db.NVarChar(200)
+  Value             String    @db.NVarChar(Max)
+  CreatedDate       DateTime  @db.DateTime
+  ModifiedDate      DateTime? @db.DateTime
+}
+
+model PersonalConfigSetting {
+  PersonalConfigSettingId     BigInt                    @id(map: "PK_PersonalConfigSetting_1") @default(autoincrement())
+  PersonalConfigSettingTypeId Int
+  UserId                      Int
+  Value                       String?                   @db.NVarChar(Max)
+  PersonalConfigSettingType   PersonalConfigSettingType @relation(fields: [PersonalConfigSettingTypeId], references: [PersonalConfigSettingTypeId], onUpdate: NoAction, map: "FK_PersonalConfigSetting_PersonalConfigSettingType")
+  User                        User                      @relation(fields: [UserId], references: [UserId], onUpdate: NoAction, map: "FK_PersonalConfigSetting_User")
+}
+
+model PersonalConfigSettingType {
+  PersonalConfigSettingTypeId Int                     @id(map: "PK_PersonalConfigSetting")
+  SettingName                 String                  @db.NVarChar(50)
+  PersonalConfigSetting       PersonalConfigSetting[]
+}
+
+model PremiseType {
+  PremiseTypeId       Int                   @id(map: "PK_PremiseType")
+  Name                String                @db.NChar(3)
+  Description         String                @db.NVarChar(20)
+  DisplayOrder        Int
+  NationalAccountType NationalAccountType[]
+}
+
+model PriceTierDefault {
+  PriceTierDefaultId                           Int                @id(map: "PK_PriceTierDefault") @default(autoincrement())
+  Name                                         String             @db.NVarChar(50)
+  FromValue                                    Decimal?           @db.Decimal(10, 2)
+  ToValue                                      Decimal?           @db.Decimal(10, 2)
+  CreatedDate                                  DateTime           @db.DateTime
+  CreatedByUserId                              Int
+  ModifiedDate                                 DateTime?          @db.DateTime
+  ModifiedByUserId                             Int?
+  User_PriceTierDefault_CreatedByUserIdToUser  User               @relation("PriceTierDefault_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_PriceTierDefault_CreatedByUser")
+  User_PriceTierDefault_ModifiedByUserIdToUser User?              @relation("PriceTierDefault_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_PriceTierDefault_ModifiedByUser")
+  ProductPriceTier                             ProductPriceTier[]
+}
+
+model PriceTierMetricType {
+  PriceTierMetricTypeId Int    @id(map: "PK_PriceTierMetricType")
+  Name                  String @db.NVarChar(50)
+}
+
+model Product {
+  ProductId                           BigInt             @id(map: "PK_Product") @default(autoincrement())
+  BrandId                             Int
+  VarietalId                          Int
+  AlcoholPercent                      Decimal?           @db.Decimal(3, 1)
+  ModifiedDate                        DateTime?          @db.DateTime
+  ModifiedByUserId                    Int?
+  ProductTypeId                       Int?
+  CreatedDate                         DateTime           @default(now(), map: "DF__Product__Created__1E3A7A34") @db.DateTime
+  CreatedByUserId                     Int                @default(0, map: "DF__Product__Created__1D4655FB")
+  Brand                               Brand              @relation(fields: [BrandId], references: [BrandId], onUpdate: NoAction, map: "FK_Product_Brand")
+  User_Product_CreatedByUserIdToUser  User               @relation("Product_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_Product_CreatedByUser")
+  User_Product_ModifiedByUserIdToUser User?              @relation("Product_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Product_ModifiedByUser")
+  ProductType                         ProductType?       @relation(fields: [ProductTypeId], references: [ProductTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Product_ProductType")
+  Varietal                            Varietal           @relation(fields: [VarietalId], references: [VarietalId], onUpdate: NoAction, map: "FK_Product_Varietal")
+  ProductContainer                    ProductContainer[]
+  ProductCost                         ProductCost[]
+  ProductGroup                        ProductGroup[]
+  ProductPriceTier                    ProductPriceTier[]
+}
+
+model ProductContainer {
+  ProductContainerId BigInt  @id(map: "PK_ProductContainer") @default(autoincrement())
+  ProductId          BigInt
+  BottleSize         Decimal @db.Decimal(10, 3)
+  BottlesPerCase     Int
+  Product            Product @relation(fields: [ProductId], references: [ProductId], onUpdate: NoAction, map: "FK_ProductContainer_Product")
+}
+
+model ProductCost {
+  ProductCostId    BigInt    @id(map: "PK_ProductCost") @default(autoincrement())
+  ProductId        BigInt
+  Cost9L           Decimal   @db.Decimal(18, 2)
+  StartDate        DateTime  @db.DateTime
+  EndDate          DateTime? @db.DateTime
+  CreatedDate      DateTime  @default(now(), map: "DF__ProductCo__Creat__1F2E9E6D") @db.DateTime
+  CreatedByUserId  Int
+  ModifiedDate     DateTime? @db.DateTime
+  ModifiedByUserId Int?
+  Product          Product   @relation(fields: [ProductId], references: [ProductId], onUpdate: NoAction, map: "FK_ProductCost_Product")
+}
+
+model ProductGroup {
+  ProductGroupId   Int                @id(map: "PK_ProductGroup") @default(autoincrement())
+  Name             String             @db.NVarChar(50)
+  BottleSize       Decimal            @db.Decimal(10, 3)
+  BottlesPerCase   Int
+  PrimaryProductId BigInt
+  CostProduct      CostProduct[]
+  Deal             Deal[]
+  Fob              Fob[]
+  ListPrice        ListPrice[]
+  Product          Product            @relation(fields: [PrimaryProductId], references: [ProductId], onUpdate: NoAction, map: "FK_ProductGroup_Product")
+  ProductGroupItem ProductGroupItem[]
+}
+
+model ProductGroupItem {
+  ProductGroupItemId Int          @id(map: "PK_ProductGroupItem") @default(autoincrement())
+  ProductGroupId     Int
+  BrandId            Int
+  VarietalId         Int
+  VintageId          Int?
+  Brand              Brand        @relation(fields: [BrandId], references: [BrandId], onUpdate: NoAction, map: "FK_ProductGroupItem_Brand")
+  ProductGroup       ProductGroup @relation(fields: [ProductGroupId], references: [ProductGroupId], onUpdate: NoAction, map: "FK_ProductGroupItem_ProductGroup")
+  Varietal           Varietal     @relation(fields: [VarietalId], references: [VarietalId], onUpdate: NoAction, map: "FK_ProductGroupItem_Varietal")
+  Vintage            Vintage?     @relation(fields: [VintageId], references: [VintageId], onDelete: NoAction, onUpdate: NoAction, map: "FK_ProductGroupItem_Vintage")
+}
+
+model ProductPriceTier {
+  ProductPriceTierId                           Int              @id(map: "PK_ProductPriceTier") @default(autoincrement())
+  PriceTierDefaultId                           Int
+  ProductId                                    BigInt
+  FromValue                                    Decimal?         @db.Decimal(10, 2)
+  ToValue                                      Decimal?         @db.Decimal(10, 2)
+  CreatedDate                                  DateTime         @db.DateTime
+  CreatedByUserId                              Int
+  ModifiedDate                                 DateTime?        @db.DateTime
+  ModifiedByUserId                             Int?
+  User_ProductPriceTier_CreatedByUserIdToUser  User             @relation("ProductPriceTier_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_ProductPriceTier_CreatedByUser")
+  User_ProductPriceTier_ModifiedByUserIdToUser User?            @relation("ProductPriceTier_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_ProductPriceTier_ModifiedByUser")
+  PriceTierDefault                             PriceTierDefault @relation(fields: [PriceTierDefaultId], references: [PriceTierDefaultId], onUpdate: NoAction, map: "FK_ProductPriceTier_PriceTierDefault")
+  Product                                      Product          @relation(fields: [ProductId], references: [ProductId], onUpdate: NoAction, map: "FK_ProductPriceTier_Product")
+}
+
+model ProductType {
+  ProductTypeId       Int                   @id(map: "PK_ProductType") @default(autoincrement())
+  Name                String                @db.NVarChar(50)
+  AdditionalTax       AdditionalTax[]
+  CostAlcoholTaxRange CostAlcoholTaxRange[]
+  CostProduct         CostProduct[]
+  ExciseTaxRange      ExciseTaxRange[]
+  Product             Product[]
+}
+
+model Program {
+  ProgramId               Int                       @id(map: "PK_Program") @default(autoincrement())
+  Name                    String                    @db.NVarChar(50)
+  Description             String                    @db.NVarChar(200)
+  ProgramTypeId           Int
+  ProgramMetricTypeId     Int?
+  Budget                  Decimal                   @db.Decimal(18, 2)
+  HasPulseDates           Boolean                   @default(false, map: "DF__Program__HasPuls__2022C2A6")
+  MetricBudget            Float?
+  IsHardBudget            Boolean                   @default(false, map: "DF__Program__IsHardB__2116E6DF")
+  Distributor_Program     Distributor_Program[]
+  InvoiceDetailForExpense InvoiceDetailForExpense[]
+  ProgramMetricType       ProgramMetricType?        @relation(fields: [ProgramMetricTypeId], references: [ProgramMetricTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Program_ProgramMetricType")
+  ProgramType             ProgramType               @relation(fields: [ProgramTypeId], references: [ProgramTypeId], onUpdate: NoAction, map: "FK_Program_ProgramType")
+  ProgramDateRange        ProgramDateRange[]
+}
+
+model ProgramDateRange {
+  ProgramDateRangeId BigInt   @id(map: "PK_ProgramDateRange") @default(autoincrement())
+  StartDate          DateTime @db.DateTime
+  EndDate            DateTime @db.DateTime
+  ProgramId          Int
+  Program            Program  @relation(fields: [ProgramId], references: [ProgramId], onUpdate: NoAction, map: "FK_ProgramDateRange_Program")
+}
+
+model ProgramMetricType {
+  ProgramMetricTypeId Int       @id(map: "PK_ProgramMetricType") @default(autoincrement())
+  Name                String    @db.NVarChar(50)
+  IsCurrency          Boolean   @default(false, map: "DF__ProgramMe__IsCur__220B0B18")
+  Program             Program[]
+}
+
+model ProgramType {
+  ProgramTypeId           Int                       @id(map: "PK_ProgramType") @default(autoincrement())
+  Name                    String                    @db.NVarChar(50)
+  Program                 Program[]
+  ProgramType_ExpenseType ProgramType_ExpenseType[]
+}
+
+model ProgramType_ExpenseType {
+  Id            Int         @id(map: "PK_ProgramType_ExpenseType") @default(autoincrement())
+  ProgramTypeId Int
+  ExpenseTypeId Int
+  ExpenseType   ExpenseType @relation(fields: [ExpenseTypeId], references: [ExpenseTypeId], onUpdate: NoAction, map: "FK_ProgramType_ExpenseType_ExpenseType")
+  ProgramType   ProgramType @relation(fields: [ProgramTypeId], references: [ProgramTypeId], onUpdate: NoAction, map: "FK_ProgramType_ExpenseType_ProgramType")
+}
+
+model ReportPercentOfBusiness {
+  ReportPercentOfBusinessId Int      @id(map: "PK_ReportPercentOfBusiness") @default(autoincrement())
+  Year                      Int
+  Distributor               String   @db.NVarChar(Max)
+  DistributorsKey           String   @db.NVarChar(Max)
+  Product                   String   @db.NVarChar(Max)
+  ProductsKey               String   @db.NVarChar(Max)
+  Jan                       Decimal? @db.Decimal(10, 2)
+  Feb                       Decimal? @db.Decimal(10, 2)
+  Mar                       Decimal? @db.Decimal(10, 2)
+  Apr                       Decimal? @db.Decimal(10, 2)
+  May                       Decimal? @db.Decimal(10, 2)
+  Jun                       Decimal? @db.Decimal(10, 2)
+  Jul                       Decimal? @db.Decimal(10, 2)
+  Aug                       Decimal? @db.Decimal(10, 2)
+  Sep                       Decimal? @db.Decimal(10, 2)
+  Oct                       Decimal? @db.Decimal(10, 2)
+  Nov                       Decimal? @db.Decimal(10, 2)
+  Dec                       Decimal? @db.Decimal(10, 2)
+  State                     String   @db.NVarChar(20)
+  Region                    String?  @db.NVarChar(200)
+}
+
+model SalesPerson {
+  SalesPersonId                           Int                @id(map: "PK_SalesPerson") @default(autoincrement())
+  Code                                    String             @db.NVarChar(50)
+  Description                             String?            @db.NVarChar(200)
+  CreatedDate                             DateTime           @db.DateTime
+  CreatedByUserId                         Int
+  ModifiedDate                            DateTime?          @db.DateTime
+  ModifiedByUserId                        Int?
+  IsActive                                Boolean
+  Distributor                             Distributor[]
+  User_SalesPerson_CreatedByUserIdToUser  User               @relation("SalesPerson_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_SalesPerson_CreatedByUser")
+  User_SalesPerson_ModifiedByUserIdToUser User?              @relation("SalesPerson_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_SalesPerson_ModifiedByUser")
+  SalesPerson_User                        SalesPerson_User[]
+}
+
+model SalesPerson_User {
+  SalesPerson_UserId Int         @id(map: "PK_SalesPerson_User") @default(autoincrement())
+  SalesPersonId      Int
+  UserId             Int
+  SalesPerson        SalesPerson @relation(fields: [SalesPersonId], references: [SalesPersonId], onUpdate: NoAction, map: "FK_SalesPerson_User_SalesPerson")
+  User               User        @relation(fields: [UserId], references: [UserId], onUpdate: NoAction, map: "FK_SalesPerson_User_User")
+}
+
+model SecurityGroup {
+  SecurityGroupId                           Int                                @id(map: "PK_SecurityGroup") @default(autoincrement())
+  Name                                      String                             @db.NVarChar(50)
+  CreatedDate                               DateTime?                          @db.DateTime
+  CreatedByUserId                           Int?
+  ModifiedDate                              DateTime?                          @db.DateTime
+  ModifiedByUserId                          Int?
+  User_SecurityGroup_CreatedByUserIdToUser  User?                              @relation("SecurityGroup_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_SecurityGroup_CreatedByUser")
+  User_SecurityGroup_ModifiedByUserIdToUser User?                              @relation("SecurityGroup_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_SecurityGroup_ModifiedByUser")
+  SecurityGroup_InvoiceStatusType           SecurityGroup_InvoiceStatusType[]
+  SecurityGroup_SecurityPermission          SecurityGroup_SecurityPermission[]
+  SecurityGroup_User                        SecurityGroup_User[]
+}
+
+model SecurityGroup_InvoiceStatusType {
+  SecurityGroup_InvoiceStatusTypeId Int               @id(map: "PK_SecurityGroup_InvoiceStatusType") @default(autoincrement())
+  SecurityGroupId                   Int
+  InvoiceStatusTypeId               Int
+  CanView                           Boolean           @default(false, map: "DF_SecurityGroup_InvoiceStatusType_CanView")
+  CanEdit                           Boolean           @default(false, map: "DF_SecurityGroup_InvoiceStatusType_CanEdit")
+  CanMoveTo                         Boolean           @default(false, map: "DF_SecurityGroup_InvoiceStatusType_CanMoveTo")
+  CanMoveFrom                       Boolean           @default(false, map: "DF_SecurityGroup_InvoiceStatusType_CanMoveFrom")
+  MoveToRequiresNote                Boolean
+  InvoiceStatusType                 InvoiceStatusType @relation(fields: [InvoiceStatusTypeId], references: [InvoiceStatusTypeId], onUpdate: NoAction, map: "FK_SecurityGroup_InvoiceStatusType_InvoiceStatusType")
+  SecurityGroup                     SecurityGroup     @relation(fields: [SecurityGroupId], references: [SecurityGroupId], onUpdate: NoAction, map: "FK_SecurityGroup_InvoiceStatusType_SecurityGroup")
+}
+
+model SecurityGroup_SecurityPermission {
+  SecurityGroup_SecurityPermissionId Int                @id(map: "PK_SecurityGroup_SecurityPermission") @default(autoincrement())
+  SecurityGroupId                    Int
+  SecurityPermissionId               Int
+  SecurityGroup                      SecurityGroup      @relation(fields: [SecurityGroupId], references: [SecurityGroupId], onUpdate: NoAction, map: "FK_SecurityGroup_SecurityPermission_SecurityGroup")
+  SecurityPermission                 SecurityPermission @relation(fields: [SecurityPermissionId], references: [SecurityPermissionId], onUpdate: NoAction, map: "FK_SecurityGroup_SecurityPermission_SecurityPermission")
+}
+
+model SecurityGroup_User {
+  SecurityGroup_UserId Int           @id(map: "PK_SecurityGroup_User") @default(autoincrement())
+  SecurityGroupId      Int
+  UserId               Int
+  SecurityGroup        SecurityGroup @relation(fields: [SecurityGroupId], references: [SecurityGroupId], onUpdate: NoAction, map: "FK_SecurityGroup_User_SecurityGroup")
+  User                 User          @relation(fields: [UserId], references: [UserId], onUpdate: NoAction, map: "FK_SecurityGroup_User_User")
+}
+
+model SecurityPermission {
+  SecurityPermissionId             Int                                @id(map: "PK_SecurityPermission")
+  Name                             String                             @db.NVarChar(100)
+  Key                              String                             @db.NVarChar(100)
+  Description                      String?                            @db.NVarChar(250)
+  DisplayInGeneralPermissions      Boolean                            @default(true, map: "DF_SecurityPermission_DisplayInGeneralPermissions")
+  SecurityGroup_SecurityPermission SecurityGroup_SecurityPermission[]
+}
+
+model State {
+  StateId                           BigInt               @id(map: "PK_State") @default(autoincrement())
+  Name                              String               @db.NVarChar(50)
+  Abbreviation                      String               @db.NVarChar(20)
+  IsActive                          Boolean              @default(true, map: "DF_State_IsActive")
+  CreatedDate                       DateTime             @db.DateTime
+  CreatedByUserId                   Int
+  ModifiedDate                      DateTime?            @db.DateTime
+  ModifiedByUserId                  Int?
+  NationalAccountTypeId             Int?
+  User_State_CreatedByUserIdToUser  User                 @relation("State_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_State_CreatedByUser")
+  User_State_ModifiedByUserIdToUser User?                @relation("State_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_State_ModifiedByUser")
+  NationalAccountType               NationalAccountType? @relation(fields: [NationalAccountTypeId], references: [NationalAccountTypeId], onDelete: NoAction, onUpdate: NoAction, map: "FK_State_NationalAccountType")
+}
+
+model SystemGeneratedDealApproval {
+  SystemGeneratedDealApprovalId Int      @id(map: "PK_SystemGeneratedDealApproval") @default(autoincrement())
+  DealId                        Int
+  ApprovedByUserId              Int
+  ApprovedDateTimeUtc           DateTime @db.DateTime
+  User                          User     @relation(fields: [ApprovedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_SystemGeneratedDealApproval_ApprovedByUser")
+  Deal                          Deal     @relation(fields: [DealId], references: [DealId], onUpdate: NoAction, map: "FK_SystemGeneratedDealApproval_Deal")
+}
+
+model UserNotification {
+  UserNotificationId BigInt       @id(map: "PK_UserNotification") @default(autoincrement())
+  NotificationId     BigInt
+  HasBeenRead        Boolean      @default(false, map: "DF_UserNotification_HasBeenRead")
+  HasBeenDismissed   Boolean      @default(false, map: "DF_UserNotification_HasBeenDismissed")
+  UserId             Int
+  Notification       Notification @relation(fields: [NotificationId], references: [NotificationId], onUpdate: NoAction, map: "FK_UserNotification_Notification")
+
+  @@index([UserId, HasBeenDismissed, HasBeenRead], map: "IX_UserNotification")
+}
+
+model Varietal {
+  VarietalId                           Int                           @id(map: "PK_Varietal") @default(autoincrement())
+  Code                                 String                        @db.NVarChar(50)
+  Name                                 String                        @db.NVarChar(50)
+  IsActive                             Boolean                       @default(true, map: "DF_Varietal_IsActive")
+  CreatedDate                          DateTime                      @db.DateTime
+  CreatedByUserId                      Int
+  ModifiedDate                         DateTime?                     @db.DateTime
+  ModifiedByUserId                     Int?
+  CostProduct                          CostProduct[]
+  DealProduct                          DealProduct[]
+  FobProduct                           FobProduct[]
+  InvoiceDetailForExpense              InvoiceDetailForExpense[]
+  InvoiceImportForDa                   InvoiceImportForDa[]
+  InvoiceImportForExpense              InvoiceImportForExpense[]
+  InvoiceProductMapForDa               InvoiceProductMapForDa[]
+  InvoiceProductMapForExpense          InvoiceProductMapForExpense[]
+  ListPriceProduct                     ListPriceProduct[]
+  Product                              Product[]
+  ProductGroupItem                     ProductGroupItem[]
+  User_Varietal_CreatedByUserIdToUser  User                          @relation("Varietal_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_Varietal_CreatedByUser")
+  User_Varietal_ModifiedByUserIdToUser User?                         @relation("Varietal_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Varietal_ModifiedByUser")
+}
+
+model Vendor {
+  VendorId                           BigInt    @id(map: "PK_Vendor") @default(autoincrement())
+  VendorName                         String    @db.NVarChar(50)
+  VendorNumber                       String    @db.NVarChar(50)
+  Address                            String?   @db.NVarChar(50)
+  City                               String?   @db.NVarChar(50)
+  State                              String?   @db.NVarChar(20)
+  Zip                                String?   @db.NVarChar(10)
+  IsActive                           Boolean   @default(true, map: "DF_Vendor_IsActive")
+  CreatedDate                        DateTime  @db.DateTime
+  CreatedByUserId                    Int
+  ModifiedDate                       DateTime? @db.DateTime
+  ModifiedByUserId                   Int?
+  User_Vendor_CreatedByUserIdToUser  User      @relation("Vendor_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_Vendor_CreatedByUser")
+  User_Vendor_ModifiedByUserIdToUser User?     @relation("Vendor_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Vendor_ModifiedByUser")
+}
+
+model Vintage {
+  VintageId                           Int                           @id(map: "PK_Vintage") @default(autoincrement())
+  Name                                String                        @db.NVarChar(50)
+  Description                         String                        @db.NVarChar(50)
+  CreatedDate                         DateTime                      @db.DateTime
+  CreatedByUserId                     Int
+  ModifiedDate                        DateTime?                     @db.DateTime
+  ModifiedByUserId                    Int?
+  DealProduct                         DealProduct[]
+  FobProduct                          FobProduct[]
+  InvoiceDetailForExpense             InvoiceDetailForExpense[]
+  InvoiceImportForDa                  InvoiceImportForDa[]
+  InvoiceProductMapForDa              InvoiceProductMapForDa[]
+  InvoiceProductMapForExpense         InvoiceProductMapForExpense[]
+  ListPriceProduct                    ListPriceProduct[]
+  ProductGroupItem                    ProductGroupItem[]
+  User_Vintage_CreatedByUserIdToUser  User                          @relation("Vintage_CreatedByUserIdToUser", fields: [CreatedByUserId], references: [UserId], onUpdate: NoAction, map: "FK_Vintage_CreatedByUser")
+  User_Vintage_ModifiedByUserIdToUser User?                         @relation("Vintage_ModifiedByUserIdToUser", fields: [ModifiedByUserId], references: [UserId], onDelete: NoAction, onUpdate: NoAction, map: "FK_Vintage_ModifiedByUser")
 }

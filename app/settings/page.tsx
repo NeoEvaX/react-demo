@@ -1,14 +1,16 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useBoundStore } from "@/store/settingsSlice";
+import { useSettingsStore } from "./settingsState";
+import { Button } from "@/components/ui/Button/Button";
+import { Input } from "@/components/ui/Input/Input";
 
 export default function Settings() {
-  const favoriteColor = useBoundStore((state) => state.favoriteColor);
-  const favoriteNumber = useBoundStore((state) => state.favoriteNumber);
-  const setFavoriteColor = useBoundStore((state) => state.updateFavoriteColor);
-  const setFavoriteNumber = useBoundStore(
+  const favoriteColor = useSettingsStore((state) => state.favoriteColor);
+  const favoriteNumber = useSettingsStore((state) => state.favoriteNumber);
+  const setFavoriteColor = useSettingsStore(
+    (state) => state.updateFavoriteColor
+  );
+  const setFavoriteNumber = useSettingsStore(
     (state) => state.updateFavoriteNumber
   );
   return (

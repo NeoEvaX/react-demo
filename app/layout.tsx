@@ -1,5 +1,4 @@
-import { Providers } from "./providers";
-import Navigation from "@/components/Navigation";
+import Navigation from "@/components/Navigation/Navigation";
 import "@/styles/globals.css";
 import { ReactNode } from "react";
 
@@ -11,10 +10,8 @@ export default function HomeLayout({ children }: AuthRootLayoutProps) {
   return (
     <html lang="en">
       <body>
-        <Providers>
-          <Navigation />
-          {children}
-        </Providers>
+        <Navigation />
+        {children}
       </body>
     </html>
   );

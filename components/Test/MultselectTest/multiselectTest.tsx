@@ -1,4 +1,5 @@
 import Multiselect from "multiselect-react-dropdown";
+import { useId } from "react";
 import Select from "react-select";
 
 const MultiselectTest = () => {
@@ -9,7 +10,12 @@ const MultiselectTest = () => {
   ];
   return (
     <>
-      <Select className="w-[500px]" options={options} isMulti />
+      <Select
+        instanceId={useId()}
+        className="w-[500px]"
+        options={options}
+        isMulti
+      />
       <div className="mt-5 w-[500px]">
         <Multiselect
           displayValue="key"

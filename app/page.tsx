@@ -3,14 +3,16 @@
 import Modalception from "@/components/Test/ModalOpenModal/modalception";
 import MultiselectTest from "@/components/Test/MultselectTest/multiselectTest";
 import { Button } from "@/components/ui/Button/Button";
+import { MaskedInput } from "@/components/ui/Input/MaskInput";
 import Modal from "@/components/ui/Modal/modal";
 import { useState } from "react";
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
+  const [phone, setPhone] = useState("");
   return (
-    <div>
-      <Button className="ml-5" type="button" onClick={() => setShowModal(true)}>
+    <div className="p-5">
+      <Button type="button" onClick={() => setShowModal(true)}>
         Open modal
       </Button>
       {showModal ? (
@@ -19,9 +21,19 @@ export default function Home() {
           <Modalception />
         </Modal>
       ) : null}
-      <div className="ml-5 mt-5">
+      <div className="mt-5">
         <MultiselectTest />
       </div>
+      <MaskedInput
+        className="mt-5 w-[500px]"
+        maskType="phone"
+        placeholder="Phone Number"
+      />
+      <MaskedInput
+        className="mt-5 w-[500px]"
+        maskType="date"
+        placeholder="Date"
+      />
     </div>
   );
 }

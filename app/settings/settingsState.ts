@@ -16,6 +16,7 @@ type State = {
 type Action = {
   updateFavoriteColor: (color: string) => void;
   updateFavoriteNumber: (number: number) => void;
+  reset: () => void;
 };
 
 export const useSettingsStore = create<State & Action>()(
@@ -24,30 +25,15 @@ export const useSettingsStore = create<State & Action>()(
       ...initialSettings,
       updateFavoriteColor: (color: string) => set({ favoriteColor: color }),
       updateFavoriteNumber: (number: number) => set({ favoriteNumber: number }),
+      reset: () => {
+        set(initialSettings);
+        useSettingsStore.persist.clearStorage();
+      },
     }),
     {
       name: "settingsStore",
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+      partialize: (state) => ({ favoriteColor: state.favoriteColor }),
+    },
+  ),
 );
-
-// const createSettingsSlice: StateCreator<SettingsSlice> = (set) => {
-//   resetters.push(() => set(initialSettings));
-//   return {
-//     ...initialSettings,
-//     updateFavoriteColor: (color: string) => set({ favoriteColor: color }),
-//     updateFavoriteNumber: (number: number) => set({ favoriteNumber: number }),
-//   };
-// };
-
-// export const useBoundStore = create<SettingsSlice>()(
-//   persist(
-//     (...a) => ({
-//       ...createSettingsSlice(...a),
-//     }),
-//     { name: "boundStore", storage: createJSONStorage(() => localStorage) }
-//   )
-// );
-
-// export const resetAllSlices = () => resetters.forEach((resetter) => resetter());

@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/Input/Input";
 export default function HiddenSettings() {
   const favoriteFood = useHiddenSettingsStore((state) => state.favoriteFood);
   const setFavoriteFood = useHiddenSettingsStore(
-    (state) => state.updateFavoriteFood
+    (state) => state.updateFavoriteFood,
   );
   return (
     <form action="/send-data-here" method="post">

@@ -10,8 +10,9 @@ const Card = ({ className, children }: CardProps) => {
     <div
       className={clsx(
         "mx-auto max-w-[480px] rounded-lg bg-white px-10 py-4 drop-shadow-xl",
-        className
-      )}>
+        className,
+      )}
+    >
       {children}
     </div>
   );

@@ -24,8 +24,8 @@ export const useHiddenSettingsStore = create<State & Action>()(
     {
       name: "hiddenSettingsStore",
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );
 
 // const createSettingsSlice: StateCreator<SettingsSlice> = (set) => {

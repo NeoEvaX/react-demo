@@ -8,6 +8,7 @@ const Navigation = async () => {
         <NavButton text={"Settings"} href={"/settings"} />
         <NavButton text={"Hidden Settings"} href={"/hiddenSettings"} />
         <NavButton text={"Dashboard"} href={"/dashboard"} />
+        <NavButton text={"Test Form"} href={"/testform"} />
       </ul>
     </div>
   );

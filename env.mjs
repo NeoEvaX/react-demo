@@ -1,7 +1,6 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
-
 export const env = createEnv({
   server: {
     DATABASE_URL: z.string(),
@@ -10,5 +9,6 @@ export const env = createEnv({
     DB_USER: z.string(),
     DB_PWD: z.string(),
     DB_NAME: z.string(),
+    API_URL: z.string().url(),
   },
 });
